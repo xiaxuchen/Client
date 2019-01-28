@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply from:'tinkerpatch.gradle'
+
+android {
+
+    signingConfigs {
+        signingconfigs {
+            keyAlias '点到为止'
+            keyPassword 'luohui123'
+            storeFile file('D:/untilchecked.jks')
+            storePassword 'luohui123'
+        }
+    }
+    dexOptions {
+        // 支持大工程模式
+        jumboMode = true
+    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.cxyz.untilchecked"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+//9a1fc9d813243fb8f9f707da
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "2791f4944cc55de38f90d072", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+
+        multiDexEnabled true
+    }
+    lintOptions {
+
+        disable 'MissingTranslation'
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signingconfigs
+        }
+    }
+    buildToolsVersion '28.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    if (!isDebug.toBoolean()) {
+        compile project(':check')
+        compile project(':homepage')
+        compile project(':mine')
+        compile project(':main')
+        compile project(':info')
+        compile project(':vac')
+    } else
+        compile project(':logiccommons')
+    //tinker热修复
+    provided("com.tinkerpatch.tinker:tinker-android-anno:1.8.0")
+    compile("com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.1.8")
+    //tinker的核心库
+    compile 'com.android.support:multidex:1.0.1'
+}
+
+
+
+
+
+

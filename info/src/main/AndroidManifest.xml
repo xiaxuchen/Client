@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cxyz.info">
+
+    <application>
+        <activity android:name=".activity.UploadLessonActivity"/>
+        <activity android:name=".activity.UploadStuActivity"/>
+        <activity android:name=".activity.UploadActivity"/>
+    </application>
+
+</manifest>

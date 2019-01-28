@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.cxyz.homepage">
+
+    <application android:allowBackup="true"
+        android:theme="@style/CheckTheme"
+        android:supportsRtl="true">
+        <activity android:name=".acitivity.MessageActivity" />
+        <activity android:name=".acitivity.SDcardActivity"/>
+        <activity android:name=".acitivity.ClazzActivity"/>
+        <activity android:name=".acitivity.NoDailyTaskActivity"></activity>
+        <activity android:name=".acitivity.CheckRedordActivity"></activity>
+        <activity android:name=".acitivity.PieChartActivity"></activity>
+        <activity android:name=".acitivity.ExportActivity"></activity>
+        <activity android:name=".acitivity.AppointActivity"></activity>
+    </application>
+
+</manifest>
