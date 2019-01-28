@@ -13,16 +13,16 @@
         android:background="@color/common_primary_color"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
 
         <com.cxyz.commons.widget.ClearEditText
             android:id="@+id/et_find"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="8dp"
             android:layout_weight="1"
             android:background="@drawable/btn_shape"
             android:hint="首拼/姓名/学号"
@@ -68,6 +68,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_update_shape"
         android:enabled="false"
+        android:layout_margin="8dp"
         android:textSize="18sp"
         android:textColor="@color/app_white"
         android:text="提交更新"/>

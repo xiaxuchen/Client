@@ -125,6 +125,9 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
             builder.setOnSheetItemClickListener((dialog, itemView, position, tag) -> {
                 adapter.setCurrent(position - 1);
                 tv_current.setText(tag);
+                String findTxt = et_find.getText().toString().trim();
+                if(!findTxt.isEmpty())
+                    adapter.filter(findTxt);
                 dialog.dismiss();
             });
             sl_current = builder.build();
