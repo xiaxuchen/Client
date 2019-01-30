@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.DateUtil;
 import com.cxyz.commons.utils.ToastUtil;
-import com.cxyz.commons.widget.TitleView;
 import com.cxyz.homepage.R;
 import com.cxyz.homepage.acitivity.CheckRedordActivity;
+import com.cxyz.homepage.acitivity.CircleCornerForm;
 import com.cxyz.homepage.acitivity.ClazzActivity;
 import com.cxyz.homepage.acitivity.ExportActivity;
 import com.cxyz.homepage.adapter.FunctionAdapter;
@@ -27,6 +26,7 @@ import com.cxyz.homepage.ipresenter.impl.IHomePresenterImpl;
 import com.cxyz.homepage.iview.IHomeView;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.logiccommons.typevalue.PowerType;
+import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -43,8 +43,8 @@ import java.util.Map;
  */
 @Route(path="/homepage/HomeFragment")
 public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeView,OnBannerListener {
-    private TitleView tv_homepage_title;
     private Banner banner;
+    //轮播图Banner需要的图片和文字
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     //Adapter需要的数据
@@ -264,7 +264,11 @@ public class HomeFragment extends BaseFragment<IHomePresenter> implements IHomeV
     private class MyLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(context).load((String) path).into(imageView);
-        }
+            //加载方形图片
+            //Glide.with(context).load((String) path).into(imageView);
+            //加载圆角图片
+            Picasso.with(context).load(String.valueOf(path)).transform(new CircleCornerForm(50
+            )).error(R.drawable.beauty).into(imageView);
+
     }
-}
+}}
