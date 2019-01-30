@@ -11,9 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/CheckTheme" >
         <activity
-            android:name="com.cxyz.mains.activity.HomeActivity">
+            android:name="com.cxyz.mains.activity.SplashActivity">
         </activity>
-        <activity android:name="com.cxyz.mains.activity.SplashActivity">
+        <activity android:name="com.cxyz.mains.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
