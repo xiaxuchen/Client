@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/common_white"
+    android:padding="8dp"
+    >
+
+    <TextView
+        android:id="@+id/tv_lesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingTop="8dp"
+        app:layout_constraintHorizontal_bias="0.05"
+        android:text="离散数学"
+        android:textSize="18sp"
+        android:textColor="@color/app_black"
+        />
+
+    <TextView
+    android:layout_marginTop="8dp"
+    android:id="@+id/tv_num_hint"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_lesson"
+    app:layout_constraintHorizontal_bias="0.05"
+    app:layout_constraintRight_toRightOf="parent"
+    android:text="课程编号"
+    android:textColor="@color/common_line"
+    />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="课程编号暂未填写,点击补全"
+        android:textColor="@color/app_black"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintLeft_toRightOf="@+id/tv_num_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_num_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_num_hint"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/tv_room_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_num_hint"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="所在教室"
+        android:textColor="@color/common_line"
+        />
+
+    <TextView
+        android:id="@+id/tv_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="教室暂无或位置不定"
+        android:textColor="@color/app_black"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintLeft_toRightOf="@+id/tv_room_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_room_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_room_hint"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更多"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_room"
+        app:layout_constraintHorizontal_bias="0.95"
+        />
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -76,7 +76,7 @@ public class UserManager {
         User u = new User();
         u.setGradeId(1702);
         u.setName("夏旭晨");
-        u.setId("17478093");
+        u.setId("16478040");
         u.setGradeName("17软工二班");
         u.setCollegeName("信息与计算机工程学院");
         u.setPower(PowerType.TEA_NORMAL);

@@ -10,6 +10,7 @@ import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.homepage.dto.GradeLessonDto;
 import com.cxyz.homepage.dto.GradeTaskDto;
 import com.cxyz.logiccommons.domain.CheckResult;
 import com.google.gson.reflect.TypeToken;
@@ -152,7 +153,7 @@ public class RequestCenter {
      * @param listener
      * @return
      */
-    public static Call getGradeTasks(String sponsorId,Integer sponsorType,DisposeDataListener listener)
+    public static Call getGradeLessons(String sponsorId,Integer sponsorType,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("sponsorId",sponsorId);
@@ -160,8 +161,8 @@ public class RequestCenter {
 
         RequestParams params = new RequestParams(map);
         try {
-            return CommonOkHttpClient.get(NetWorkHomeUrl.GET_GRADE_TASKS,params,new DisposeDataHandler(listener,
-                    new TypeToken<CheckResult<List<GradeTaskDto>>>(){}.getType()));
+            return CommonOkHttpClient.get(NetWorkHomeUrl.GET_GRADE_LESSONS,params,new DisposeDataHandler(listener,
+                    new TypeToken<CheckResult<List<GradeLessonDto>>>(){}.getType()));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");

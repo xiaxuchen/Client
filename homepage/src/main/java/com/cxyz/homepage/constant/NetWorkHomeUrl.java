@@ -34,7 +34,7 @@ public interface NetWorkHomeUrl {
     /**
      * 获取班级和所教课程信息
      */
-    String GET_GRADE_TASKS = Constant.ROOT_URL+"/task/getGradeTasks";
+    String GET_GRADE_LESSONS = Constant.ROOT_URL+"/task/getGradeTasks";
 
     /**
      * 获取统计的excel

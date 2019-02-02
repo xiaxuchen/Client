@@ -19,7 +19,7 @@
         <activity android:name=".acitivity.MessageActivity">
 
         </activity>
-        <activity android:name=".acitivity.ExportActivity">
+        <activity android:name=".acitivity.MineLessonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
