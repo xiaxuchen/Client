@@ -17,8 +17,7 @@ public abstract class IExportPresenter extends IBasePresenter<IExportModel,IExpo
 
     /**
      * 下载统计excel
-     * @param gradeId
-     * @param taskName
+     * @param lessonId 课程id
      */
-    public abstract void getStatisticExcel(Integer gradeId,String taskName);
+    public abstract void getStatisticExcel(Integer lessonId);
 }

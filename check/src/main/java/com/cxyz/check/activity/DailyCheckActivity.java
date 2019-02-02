@@ -494,11 +494,6 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
         qmuiev_load.show(false,"暂无",null,null,null);
     }
 
-    @Override
-    protected boolean isStateBar() {
-        return false;
-    }
-
     /**
      * @param intent 跳转时所用的
      */

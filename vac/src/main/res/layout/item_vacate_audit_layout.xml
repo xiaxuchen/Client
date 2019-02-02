@@ -6,7 +6,7 @@
     android:background="@drawable/vac_audit_background"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:paddingBottom="16dp"
     >
 
     <ImageView
@@ -86,7 +86,7 @@
         android:id="@+id/tv_audit_des_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="审批意见{vac_down}"
+        android:text="审批意见{vac-down}"
         android:textColor="@color/gray"
         app:layout_constraintLeft_toLeftOf="@+id/iv_audit_icon"
         app:layout_constraintTop_toBottomOf="@+id/tv_audit_time_hint" />
@@ -99,7 +99,7 @@
         android:layout_marginRight="16dp"
         app:layout_constraintLeft_toLeftOf="@+id/tv_reason_hint"
         app:layout_constraintTop_toBottomOf="@+id/tv_audit_des_hint"
-        android:visibility="gone"
+        android:visibility="invisible"
         />
 
 </android.support.constraint.ConstraintLayout>

@@ -58,7 +58,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="{next}"/>
+                android:text="{vac-next}"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@drawable/vac_item_background"
-                android:text="{next}"/>
+                android:text="{vac-next}"/>
         </RelativeLayout>
 
         <View
@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@drawable/vac_item_background"
-                android:text="{next}"/>
+                android:text="{vac-next}"/>
         </RelativeLayout>
 
         <View

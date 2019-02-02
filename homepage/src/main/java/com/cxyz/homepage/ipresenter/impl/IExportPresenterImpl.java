@@ -33,9 +33,9 @@ public class IExportPresenterImpl extends IExportPresenter {
     }
 
     @Override
-    public void getStatisticExcel(Integer gradeId, String taskName) {
+    public void getStatisticExcel(Integer lessonId) {
         mIView.showLoadingView();
-        mIModle.getStatisticExcel(gradeId, taskName, new IExportModel.getExcelListener() {
+        mIModle.getStatisticExcel(lessonId, new IExportModel.getExcelListener() {
             @Override
             public void onProgress(int progress) {
                 mIView.onProgress(progress);

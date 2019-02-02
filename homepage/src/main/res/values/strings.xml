@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">HomePage</string>
     <string name="alwaysfun" >常用功能</string>
-    <string-array name="classname">
-        <item>1701软件工程</item>
-        <item>1702软件工程</item>
-        <item>1701软件技术</item>
-        <item>1702软件技术</item>
-        <item>1701数字媒体</item>
-        <item>1702数字媒体</item>
+    <string-array name="common_sp_hint_content">
+        <item>暂无</item>
     </string-array>
+
+    <!--homePage中的字符资源-->
+    <string name="homepage_export_title">导出数据</string>
+    <string name="homepage_export_tv_check_class">选择班级</string>
+    <string name="homepage_export_tv_check_lesson">选择课程</string>
+    <string name="homepage_export_btn_download">下载</string>
 </resources>

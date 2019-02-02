@@ -142,9 +142,9 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
                 tv_vac_type.setText("请选择");
                 tv_vac_start.setText("请选择");
                 tv_vac_end.setText("请选择");
-                tv_type_icon.setText("{next}");
-                tv_start_icon.setText("{next}");
-                tv_end_icon.setText("{next}");
+                tv_type_icon.setText("{vac-next}");
+                tv_start_icon.setText("{vac-next}");
+                tv_end_icon.setText("{vac-next}");
                 et_time_len.setText("");
                 start = null;
                 end = null;
@@ -192,12 +192,12 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
      */
     private void onIconClick(TextView v,IconTextView icon)
     {
-        if(v.getText().equals("{next}"))
+        if(v.getText().equals("{vac-next}"))
             showDatePicker(v,icon);
         else
         {
             v.setText("请选择");
-            icon.setText("{next}");
+            icon.setText("{vac-next}");
             if(v == tv_vac_start)
                 start = null;
             else
@@ -220,7 +220,7 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
         picker.setDateRangeEnd(c.get(Calendar.YEAR),12,31);
         picker.setOnDateTimePickListener((DateTimePicker.OnYearMonthDayTimePickListener) (s, s1, s2, s3, s4) -> {
             DateTime oldTime;
-            icon.setText("{clear}");
+            icon.setText("{vac-clear}");
             DateTime dateTime = new DateTime(s,s1,s2,s3,s4,"0");
             if(tv.equals(tv_vac_start))
             {
@@ -246,13 +246,13 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
                 {
                     start = oldTime;
                     if(oldTime == null)
-                        tv_start_icon.setText("{next}");
+                        tv_start_icon.setText("{vac-next}");
                 }
                 else
                 {
                     end = oldTime;
                     if(oldTime == null)
-                        tv_start_icon.setText("{next}");
+                        tv_start_icon.setText("{vac-next}");
                 }
                 ToastUtil.showShort("开始时间必须早于结束时间");
                 return;
@@ -276,7 +276,7 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
                 toggleEnable();
             tv_vac_type.setText(items[i]);
             dialogInterface.cancel();
-            tv_type_icon.setText("{clear}");
+            tv_type_icon.setText("{vac-clear}");
         });
         builder.show();
     }

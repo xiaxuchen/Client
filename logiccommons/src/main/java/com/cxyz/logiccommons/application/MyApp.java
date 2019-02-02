@@ -24,7 +24,6 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by 夏旭晨 on 2018/9/20.
@@ -64,8 +63,8 @@ public class MyApp extends BaseApplication {
 
     private void initJpush()
     {
-        JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);
+//        JPushInterface.setDebugMode(true);
+//        JPushInterface.init(this);
     }
 
     /**

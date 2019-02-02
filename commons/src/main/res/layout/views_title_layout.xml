@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/common_primary_color"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="32dp"
+    android:paddingBottom="12dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:padding="8dp">
+        >
 
         <TextView
             android:id="@+id/title_back"
@@ -36,7 +38,7 @@
             android:gravity="center"
             android:text="点到为止"
             android:textColor="@color/common_white"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/title_more"

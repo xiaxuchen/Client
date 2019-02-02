@@ -42,10 +42,10 @@ public class AuditedAdapter extends AdapterBase<Audit> {
             if(tv_audit_des.getVisibility() == View.VISIBLE)
             {
                 tv_audit_des.setVisibility(View.GONE);
-                holder.setText(R.id.tv_audit_des_hint,"审核意见 {vac_down}");
+                holder.setText(R.id.tv_audit_des_hint,"审核意见 {vac-down}");
             }else {
                 tv_audit_des.setVisibility(View.VISIBLE);
-                holder.setText(R.id.tv_audit_des_hint,"审核意见 {vac_up}");
+                holder.setText(R.id.tv_audit_des_hint,"审核意见 {vac-up}");
             }
 
         });

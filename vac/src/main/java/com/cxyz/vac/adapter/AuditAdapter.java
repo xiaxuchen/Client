@@ -54,9 +54,9 @@ public class AuditAdapter extends AdapterBase<VacateDto>{
             if(tv_reason.getVisibility() == View.VISIBLE)
             {
                 visible = View.GONE;
-                tv_reason_hint.setText("请假事由 {vac_down}");
+                tv_reason_hint.setText("请假事由 {vac-down}");
             }else {
-                tv_reason_hint.setText("请假事由 {vac_up}");
+                tv_reason_hint.setText("请假事由 {vac-up}");
             }
             tv_reason.setVisibility(visible);
         });

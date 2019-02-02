@@ -25,7 +25,6 @@ import com.tencent.tinker.loader.app.ApplicationLike;
 import com.tinkerpatch.sdk.TinkerPatch;
 import com.tinkerpatch.sdk.loader.TinkerPatchApplicationLike;
 
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Administrator on 2019/1/23.
@@ -70,8 +69,8 @@ public class MyApplication extends BaseApplication {
 
     private void initJpush()
     {
-        JPushInterface.setDebugMode(true);
-        JPushInterface.init(getApplicationContext());
+//        JPushInterface.setDebugMode(true);
+//        JPushInterface.init(getApplicationContext());
     }
 
     /**

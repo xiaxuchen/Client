@@ -5,4 +5,10 @@
     <string name="mine">我的</string>
     <string name="check_history">考勤历史</string>
     <string name="check_back">返回</string>
+    <string name="check_my_check_progress_tv_hint">出勤率</string>
+    <string name="check_my_check_tv_empty_hint">暂无内容</string>
+    <string name="check_my_check_tv_click_hint">点击查看详情</string>
+    <string name="check_my_check_tv_default_late">迟到/早退0次</string>
+    <string name="check_my_check_tv_default_absenteeism">缺勤0次</string>
+    <string name="check_my_check_tv_default_exception">0项考勤异常</string>
 </resources>

@@ -18,10 +18,13 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
                 <action android:name="notification_cancelled"/>
+                <action android:name="com.cxyz.untilchecked.intent.push" />
                 <category android:name="com.cxyz.untilchecked" />
             </intent-filter>
         </receiver>
         <activity android:name=".activity.TempActivity" />
+        <service android:name=".service.PushService" />
+        <service android:name=".service.PushSuccessService" />
     </application>
 
 </manifest>

@@ -41,8 +41,6 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
     private TextView tv_progress;
     //考勤异常
     private TextView tv_checkerror;
-    //记录是否为第一次加载
-    private int first = 0;
 
     private RecordAdapter adapter;
 
@@ -132,16 +130,13 @@ public class MyCheckFragment extends BaseFragment<IMyCheckPresenter> implements 
     protected void onLazyLoad() {
         super.onLazyLoad();
         Integer gradeId = UserManager.getInstance().getUser().getGradeId();
-        if (gradeId == null&&first == 0)
+        if (gradeId == null)
         {
             ll_content.setVisibility(View.GONE);
             tv_empty.setVisibility(View.VISIBLE);
             return;
         }
-        //如果是第一次显示则加载数据，因为加载adapter会显示一次，所以真正第一次用户看到是在第二次
-        if(first != 0)
-            iPresenter.showRecords();
-        first++;
+        iPresenter.showRecords();
     }
 
 

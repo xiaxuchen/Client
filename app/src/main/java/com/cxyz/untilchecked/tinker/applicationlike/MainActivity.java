@@ -9,7 +9,6 @@ import android.widget.EditText;
 import com.cxyz.commons.context.ContextManager;
 import com.cxyz.untilchecked.R;
 
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Administrator on 2019/1/24.
@@ -30,7 +29,6 @@ public class MainActivity extends Activity {
         Button btn_change = findViewById(R.id.btn_change);
 
         btn_change.setOnClickListener(view -> {
-            JPushInterface.setAlias(ContextManager.getContext(),1,et_alia.getText().toString().trim());
         });
     }
 }

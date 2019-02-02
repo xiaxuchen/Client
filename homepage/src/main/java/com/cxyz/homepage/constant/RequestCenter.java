@@ -171,21 +171,19 @@ public class RequestCenter {
 
     /**
      * 获取统计的excel
-     * @param sponsorId
-     * @param sponsorType
-     * @param gradeId
-     * @param taskName
+     * @param sponsorId 发起人id
+     * @param sponsorType 发起人类型
+     * @param lessonId 课程id
      * @param listener
      * @return
      */
     public static Call getStatisticExcel(String sponsorId,Integer sponsorType,
-                                         Integer gradeId,String taskName,DisposeDownLoadListener listener)
+                                         Integer lessonId,DisposeDownLoadListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("sponsorId",sponsorId);
         map.put("sponsorType",sponsorType+"");
-        map.put("gradeId",gradeId+"");
-        map.put("taskName",taskName);
+        map.put("lessonId",lessonId+"");
 
         RequestParams params = new RequestParams(map);
         try {

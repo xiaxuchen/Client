@@ -106,6 +106,7 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
+
     private BaseFragment getFragment(String fragmentName)
     {
         return (BaseFragment) ARouter.getInstance().
@@ -140,15 +141,6 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         return null;
     }
 
-    @Override
-    public void showLoadingView() {
-
-    }
-
-    @Override
-    public void hideLoadingView() {
-
-    }
 
     /**
      * 选择要显示的fragment

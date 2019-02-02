@@ -9,7 +9,8 @@
         <activity android:name=".acitivity.NoDailyTaskActivity"></activity>
         <activity android:name=".acitivity.CheckRedordActivity"></activity>
         <activity android:name=".acitivity.PieChartActivity"></activity>
-        <activity android:name=".acitivity.ExportActivity"></activity>
+        <activity android:name=".acitivity.ExportActivity">
+        </activity>
         <activity android:name=".acitivity.AppointActivity"></activity>
     </application>
 

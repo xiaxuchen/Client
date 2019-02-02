@@ -55,11 +55,11 @@ dependencies {
    compile 'com.github.florent37:diagonallayout:1.0.9'//切角图片
     compile 'com.github.florent37:diagonallayout:1.0.9'
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support.constraint:constraint-layout:1.1.3'
     compile 'com.haibin:calendarview:3.4.8'//日历控件
     //noinspection GradleCompatible
     compile 'com.android.support:cardview-v7:26.+'
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
     compile 'com.zhuangfei:TimetableView:2.0.6'//课表库
     compile project(':logiccommons')
-    //compile project(path: ':main')
 }

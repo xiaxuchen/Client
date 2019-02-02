@@ -43,9 +43,10 @@ public class IExportModelImpl extends IExportModel {
     }
 
     @Override
-    public void getStatisticExcel(Integer gradeId, String taskName,getExcelListener listener) {
+    public void getStatisticExcel(Integer lessonId,getExcelListener listener)
+    {
         User user = UserManager.getInstance().getUser();
-        addCall(RequestCenter.getStatisticExcel(user.getId(), user.getType(), gradeId, taskName, new DisposeDownLoadListener() {
+        addCall(RequestCenter.getStatisticExcel(user.getId(), user.getType(),lessonId, new DisposeDownLoadListener() {
             @Override
             public void onProgress(int progrss) {
                 listener.onProgress(progrss);

@@ -20,7 +20,7 @@
         android:textSize="14sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_audit_icon" />
+        />
 
     <TextView
         android:id="@+id/tv_vac_type"
@@ -87,7 +87,7 @@
         android:id="@+id/tv_reason_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="请假事由 {vac_down}"
+        android:text="请假事由 {vac-down}"
         android:textColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@+id/tv_len_hint"
         app:layout_constraintLeft_toLeftOf="@+id/tv_audit_state_hint" />
@@ -107,17 +107,22 @@
         android:id="@+id/tv_audits_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="审核情况 {vac_down}"
+        android:text="审核情况 {vac-down}"
         android:textColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@+id/tv_reason"
         app:layout_constraintLeft_toLeftOf="@+id/tv_audit_state_hint" />
 
-    <ListView
+    <com.cxyz.vac.widget.NoScrollListView
         android:id="@+id/lv_audits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:scrollbars="none"
+        android:fadingEdge="none"
+        android:dividerHeight="0.5dp"
+        android:divider="#00000000"
+        android:footerDividersEnabled="true"
         app:layout_constraintTop_toBottomOf="@+id/tv_audits_hint"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

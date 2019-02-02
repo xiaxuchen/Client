@@ -14,6 +14,7 @@ import com.cxyz.commons.manager.ActivityStackManager;
 import com.cxyz.commons.manager.ScreenManager;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.greenrobot.eventbus.EventBus;
@@ -117,7 +118,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         if(!isShowTitle()){
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
-        //screenManager.setStatusBar(isStateBar(), this,statusColor());
+        screenManager.setStatusBar(isStateBar(), this,statusColor());
         screenManager.setScreenRotate(isScreenRotate(), this);
         screenManager.setFullScreen(isFullScreen(), this);
     }

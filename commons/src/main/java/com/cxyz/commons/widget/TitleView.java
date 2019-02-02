@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cxyz.commons.R;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 
 /**
