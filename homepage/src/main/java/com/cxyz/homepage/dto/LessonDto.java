@@ -1,15 +1,23 @@
 package com.cxyz.homepage.dto;
 
+import java.io.Serializable;
+
 /**
  * GradeTaskDto中的考勤任务
  */
-public class LessonDto {
+public class LessonDto implements Serializable{
 
     private Integer id;//任务id
 
     private String name;//课程名称
 
     private String num;//编号
+
+    private String checkerName;//考勤人名字
+
+    private String checkerId;//考勤人id
+
+    private Integer checkerType;//考勤人类型
 
     private String roomName;//房间名
 
@@ -55,12 +63,39 @@ public class LessonDto {
         this.roomId = roomId;
     }
 
+    public String getCheckerName() {
+        return checkerName;
+    }
+
+    public void setCheckerName(String checkerName) {
+        this.checkerName = checkerName;
+    }
+
+    public String getCheckerId() {
+        return checkerId;
+    }
+
+    public void setCheckerId(String checkerId) {
+        this.checkerId = checkerId;
+    }
+
+    public Integer getCheckerType() {
+        return checkerType;
+    }
+
+    public void setCheckerType(Integer checkerType) {
+        this.checkerType = checkerType;
+    }
+
     @Override
     public String toString() {
         return "LessonDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", num='" + num + '\'' +
+                ", checkerName='" + checkerName + '\'' +
+                ", checkerId='" + checkerId + '\'' +
+                ", checkerType=" + checkerType +
                 ", roomName='" + roomName + '\'' +
                 ", roomId=" + roomId +
                 '}';

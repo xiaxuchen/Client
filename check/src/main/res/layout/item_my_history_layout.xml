@@ -37,7 +37,6 @@
     <TextView
         android:id="@+id/tv_date"
         android:layout_marginRight="8dp"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
@@ -48,13 +47,13 @@
 
     <TextView
         android:id="@+id/tv_result"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@color/common_fourth_brown"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_des"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
 

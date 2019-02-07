@@ -302,7 +302,6 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         //注册LeakCanary
         RefWatcher refWatcher = ContextManager.getRefWatcher();
         //注销EventBus
-        refWatcher.watch(this);
         if(eventBusEnable())
             EventBus.getDefault().unregister(this);
         super.onDestroy();

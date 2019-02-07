@@ -10,4 +10,5 @@
     <string name="homepage_export_tv_check_class">选择班级</string>
     <string name="homepage_export_tv_check_lesson">选择课程</string>
     <string name="homepage_export_btn_download">下载</string>
+    <string name="homepage_mine_lesson_tv_more_txt">更多</string>
 </resources>

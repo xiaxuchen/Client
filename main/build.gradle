@@ -54,6 +54,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
     compile project(':logiccommons')
+    compile 'com.bigkoo:ConvenientBanner:2.1.4'
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

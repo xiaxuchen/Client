@@ -7,6 +7,7 @@ import com.cxyz.check.R;
 import com.cxyz.check.dto.CheckHistoryDto;
 import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
+import com.cxyz.commons.date.Date;
 import com.cxyz.commons.date.DateTime;
 import com.cxyz.logiccommons.typevalue.CheckRecordResult;
 
@@ -34,15 +35,22 @@ public class HistoryAdapter extends AdapterBase<CheckHistoryDto> {
             listener.onClick(view,position);
         });
         DateTime dateTime = DateTime.fromTS(item.getCommitTime());
-        holder.setText(R.id.tv_task_name,item.getTaskName());
-        holder.setText(R.id.tv_date,dateTime.getDate()+"\n    "+dateTime.getTime());
+        Date date = Date.fromUDate(item.getDate());
+        holder.setText(R.id.tv_lesson_name,item.getLessonName());
+        holder.setText(R.id.tv_date, date.getDate());
+        holder.setText(R.id.tv_times,item.getStart()+"-"+item.getEnd()+"节");
+        if(date.getDate().equals(dateTime.getDate()))
+            holder.setText(R.id.tv_commit_time,dateTime.getTime());
+        else
+            holder.setText(R.id.tv_commit_time,dateTime.getDate()+" "+dateTime.getTime());
+
         if(item.getResults() == null)
             return;
         int counts[] = new int[4];
 
         if(item.getResults().get(0).getResultType() == null)
         {
-            holder.setText(R.id.tv_des,"迟到:0早退:0缺勤:0请假:0");
+            holder.setText(R.id.tv_result,"全勤");
         }else {
             for(CheckHistoryDto.RecordResultCustom result:item.getResults())
             {
@@ -63,8 +71,17 @@ public class HistoryAdapter extends AdapterBase<CheckHistoryDto> {
                 }
             }
             StringBuilder builder = new StringBuilder();
-            builder.append("迟到:"+counts[0]).append("早退:"+counts[1]+"缺勤:"+counts[2]+"请假:"+counts[3]);
-            holder.setText(R.id.tv_des,builder.toString());
+            boolean flag = true;
+            if(counts[0] != 0)
+                builder.append(counts[0]).append("迟到 ");
+            if(counts[1] != 0)
+                builder.append(counts[1]).append("早退 ");
+            if(counts[2] != 0)
+                builder.append(counts[2]).append("缺勤 ");
+            if(counts[3]!=0)
+                builder.append(counts[3]).append("请假 ");
+
+            holder.setText(R.id.tv_result,builder.toString());
         }
 
         super.convertView(holder,item);

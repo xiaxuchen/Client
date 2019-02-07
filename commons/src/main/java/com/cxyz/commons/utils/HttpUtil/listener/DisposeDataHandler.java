@@ -10,6 +10,7 @@ public class DisposeDataHandler {
     public DisposeDataListener listener = null;
     public Type clazz = null;
     public String mSource;
+    public String content_disposition;
 
     /**
      * 封装基本的回调
@@ -36,8 +37,20 @@ public class DisposeDataHandler {
      * @param source 文件存放路径
      */
     public DisposeDataHandler(DisposeDataListener listener,String source){
+       this(listener,source,null);
+    }
+
+    /**
+     * 需要判断内容类型时使用
+     * @param listener
+     * @param source 文件存放路径
+     * @param content_disposition 内容类型
+     */
+    public DisposeDataHandler(DisposeDataListener listener,String source,String content_disposition)
+    {
         this.listener = listener;
         this.mSource = source;
+        this.content_disposition = content_disposition;
     }
 
 }

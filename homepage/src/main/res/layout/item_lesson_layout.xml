@@ -38,7 +38,7 @@
         android:id="@+id/tv_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="课程编号暂未填写,点击补全"
+        android:text="暂无"
         android:textColor="@color/app_black"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toRightOf="@+id/tv_num_hint"
@@ -64,7 +64,7 @@
         android:id="@+id/tv_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="教室暂无或位置不定"
+        android:text="暂无"
         android:textColor="@color/app_black"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintLeft_toRightOf="@+id/tv_room_hint"
@@ -74,13 +74,16 @@
         />
 
     <TextView
+        android:id="@+id/tv_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="更多"
+        android:text="@string/homepage_mine_lesson_tv_more_txt"
+        android:textColor="@drawable/mine_lesson_more_selector"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_room"
         app:layout_constraintHorizontal_bias="0.95"
+        android:textSize="16sp"
         />
 
 

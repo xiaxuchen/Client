@@ -47,6 +47,8 @@ public class CommonJsonCallback implements Callback {
 
     @Override
     public void onResponse(Call call, Response response) throws IOException {
+        LogUtil.e(response.header("content-disposition"));
+        LogUtil.e(response.header("content-type"));
         final String result = response.body().string();
         handler.post(() -> handlerResponse(result));
     }

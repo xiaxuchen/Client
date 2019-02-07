@@ -19,38 +19,6 @@ import com.cxyz.mains.ipresenter.ISplashPresenter;
  */
 
 public class ISplashPresenterImpl extends ISplashPresenter {
-    @Override
-    public void Update() {
-        mIModle.confirmUpdate(new ISplashModel.ConfirmListener() {
-            @Override
-            public void onUpdate(UpdateEntity info) {
-                    if(info == null)
-                    {
-                        mIView.noUpdate();
-                        return;
-                    }
-                    //从json中获取版本信息，如果与当前版本相同则跳转到登录界面
-                    if(AppUtil.getVersionCode(ContextManager.getContext())== info.getVersionCode())
-                    {
-                        mIView.noUpdate();
-                        return;
-                    }
-                    StringBuilder builder = new StringBuilder();
-                    for(String des:info.getDes())
-                    {
-                        builder.append(des+"\n");
-                    }
-                    //版本号不一致则获取app的url和最新版本的描述信息
-                    mIView.showUpdateView(info.getVersionCode(),builder.toString(), NetWorkConstant.GETAPP);
-            }
-
-            @Override
-            public void onFail(String error) {
-                mIView.noUpdate();
-            }
-        });
-    }
-
 
     @Override
     public void autoLogin() {
@@ -83,7 +51,7 @@ public class ISplashPresenterImpl extends ISplashPresenter {
 
             });
         }else{
-            mIView.exitSplash();
+            mIView.autoLoginFail("");
         }
     }
 

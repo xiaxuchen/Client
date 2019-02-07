@@ -1,6 +1,7 @@
 package com.cxyz.homepage.imodel;
 
 import com.cxyz.commons.IModel.IBaseModel;
+import com.cxyz.homepage.dto.GradeLessonDto;
 import com.cxyz.homepage.dto.GradeTaskDto;
 
 import java.io.File;

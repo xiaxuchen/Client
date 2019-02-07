@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.UserManager;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.logiccommons.constant.RequestCenter;
@@ -51,7 +52,7 @@ public class PushService extends Service {
                             i.putExtra("info",dto.getInfo());
                             i.putExtra("sendTime",dto.getSendTime());
                             i.putExtra("id",dto.getId());
-                            sendBroadcast(i);
+                            LocalBroadcastManager.getInstance(PushService.this).sendBroadcast(i);
                         }
 
                     }

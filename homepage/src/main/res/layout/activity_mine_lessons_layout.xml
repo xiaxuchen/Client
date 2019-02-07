@@ -13,6 +13,12 @@
         android:layout_height="wrap_content"
         app:title="我的课程"/>
 
+    <com.qmuiteam.qmui.widget.QMUIEmptyView
+        android:id="@+id/ev_lessons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

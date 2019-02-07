@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.view.WindowManager;
 
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.statebar.StateBarHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 /**
@@ -41,7 +42,7 @@ public class ScreenManager {
     public void setStatusBar(boolean isChange, BaseActivity activity,Integer color) {
         if(!isChange)
             return;
-        QMUIStatusBarHelper.translucent(activity);
+        StateBarHelper.getInstance().translucent(activity,null);
         /*if(!(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
                 // Essential Phone 不支持沉浸式，否则系统又不从状态栏下方开始布局又给你下发 WindowInsets
                 && !Build.BRAND.toLowerCase().contains("essential")))

@@ -7,6 +7,7 @@
         <attr name="moreIcon" format="reference" />
         <attr name="backText" format="string" />
         <attr name="moreText" format="string" />
+        <attr name="background" format="reference"/>
     </declare-styleable>
 
 </resources>

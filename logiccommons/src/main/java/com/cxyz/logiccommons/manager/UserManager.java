@@ -16,7 +16,6 @@ import com.cxyz.logiccommons.typevalue.UserType;
  */
 public class UserManager {
 
-    private static final int SET_ALIAS = 1;
 
     public User getUser() {
         return u;

@@ -36,7 +36,7 @@ public class MyHistoryAdapter extends AdapterBase<MyHistoryDto> {
         });
         DateTime dateTime = DateTime.fromTS(item.getTime());
         holder.setText(R.id.tv_task_name,item.getSubject());
-        holder.setText(R.id.tv_date,dateTime.getDate()+"  "+dateTime.getTime());
+        holder.setText(R.id.tv_date,dateTime.getDate()+" "+dateTime.getTime());
         holder.setText(R.id.tv_des,item.getDes());
         String result = null;
         switch (item.getResult())

@@ -40,5 +40,15 @@ public interface NetWorkHomeUrl {
      * 获取统计的excel
      */
     String GET_STATISTIC_EXCEL = Constant.ROOT_URL+"/task/getStatisticExcel";
+
+    /**
+     * 获取课程的考勤历史记录
+     */
+    String GET_LESSON_HISTORIES = Constant.ROOT_URL+"/record/getLessonHistories";
+
+    /**
+     * 更新课程编号
+     */
+    String UPDATE_LESSON_NUM = Constant.ROOT_URL+"/lesson/updateLessonNum";
     
 }

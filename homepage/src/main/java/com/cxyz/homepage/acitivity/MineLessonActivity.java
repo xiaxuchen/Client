@@ -1,5 +1,7 @@
 package com.cxyz.homepage.acitivity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,10 @@ import com.cxyz.homepage.ipresenter.IMineLessonPresenter;
 import com.cxyz.homepage.ipresenter.impl.IExportPresenterImpl;
 import com.cxyz.homepage.ipresenter.impl.IMineLessonPresenterImpl;
 import com.cxyz.homepage.view.IMineLessonView;
+import com.qmuiteam.qmui.widget.QMUIEmptyView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -42,9 +48,37 @@ public class MineLessonActivity extends BaseActivity<IMineLessonPresenter> imple
 
     private ListView lv_lessons;
 
+    private QMUIEmptyView ev_lessons;
+
     private int selectedIndex = 0;
 
     private AdapterBase<LessonDto> lessonAdapter;
+
+    @Override
+    protected boolean eventBusEnable() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateLessonDto(LessonDto dto)
+    {
+        LogUtil.d(dto);
+        final List<LessonDto> list = lessonAdapter.getList();
+        LogUtil.d(list);
+        int i = 0;
+        for(LessonDto dto1:list)
+        {
+            if(dto.getId().equals(dto1.getId()))
+            {
+                list.set(i,dto);
+                LogUtil.d(i);
+                break;
+            }
+            i++;
+        }
+        LogUtil.d(list);
+        lessonAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public int getContentViewId() {
@@ -56,6 +90,7 @@ public class MineLessonActivity extends BaseActivity<IMineLessonPresenter> imple
         tv_title = findViewById(R.id.tv_title);
         lv_grades = findViewById(R.id.lv_grades);
         lv_lessons = findViewById(R.id.lv_lessons);
+        ev_lessons = findViewById(R.id.ev_lessons);
     }
 
     @Override
@@ -79,6 +114,15 @@ public class MineLessonActivity extends BaseActivity<IMineLessonPresenter> imple
 
     @Override
     public void showGradeLessons(List<GradeLessonDto> data) {
+        if(data == null || data.isEmpty())
+        {
+            ev_lessons.show(false,"当前暂无课程信息",null,"重新加载",view ->
+            {
+                iPresenter.getGradeLessons();
+            });
+            return;
+        }
+        ev_lessons.hide();
         lv_grades.setAdapter(new BaseAdapter() {
 
             @Override
@@ -132,6 +176,12 @@ public class MineLessonActivity extends BaseActivity<IMineLessonPresenter> imple
                     holder.setText(R.id.tv_room,item.getRoomName());
                 if(item.getNum() != null)
                     holder.setText(R.id.tv_num,item.getNum());
+                holder.setOnClickListener(R.id.tv_more,view ->
+                {
+                    Intent intent = new Intent(getActivity(),LessonDetailActivity.class);
+                    intent.putExtra("lessonDto",item);
+                    startActivity(intent);
+                });
             }
         };
 
@@ -148,6 +198,18 @@ public class MineLessonActivity extends BaseActivity<IMineLessonPresenter> imple
     @Override
     public void showError(Object error) {
         if(error instanceof String)
-            ToastUtil.showShort(error);
+        {
+            ev_lessons.show(false,"当前暂无课程信息",null,"重新加载",view ->
+            {
+                iPresenter.getGradeLessons();
+            });
+        }
     }
+
+    @Override
+    public void showLoadingView() {
+        super.showLoadingView();
+        ev_lessons.show(true,"正在加载课程信息",null,null,null);
+    }
+
 }

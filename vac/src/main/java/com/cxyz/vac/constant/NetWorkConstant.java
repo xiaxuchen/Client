@@ -27,4 +27,6 @@ public interface NetWorkConstant {
      * 获取请假信息
      */
     String GET_VACATES = Constant.ROOT_URL+"/vacate/getVacates";
+
+
 }
