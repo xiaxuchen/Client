@@ -47,6 +47,14 @@ public class User{
 	 */
 	private String gradeName;
 
+	public User() {
+	}
+
+	public User(String id, Integer type) {
+		this.id = id;
+		this.type = type;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -137,14 +145,15 @@ public class User{
 
 	@Override
 	public String toString() {
-		return "LoginDto{" +
-				"name='" + name + '\'' +
+		return "User{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
 				", sex='" + sex + '\'' +
 				", phone='" + phone + '\'' +
 				", photo='" + photo + '\'' +
 				", power=" + power +
 				", type=" + type +
-				", CollegeName='" + collegeName + '\'' +
+				", collegeName='" + collegeName + '\'' +
 				", collegeId=" + collegeId +
 				", gradeId=" + gradeId +
 				", gradeName='" + gradeName + '\'' +

@@ -37,17 +37,9 @@ public class AuditedAdapter extends AdapterBase<Audit> {
         }
         holder.setText(R.id.tv_audit_state,state);
         TextView tv_audit_des = holder.getView(R.id.tv_audit_des);
-        tv_audit_des.setText(item.getInfo());
-        holder.setOnClickListener(R.id.tv_audit_des_hint,view -> {
-            if(tv_audit_des.getVisibility() == View.VISIBLE)
-            {
-                tv_audit_des.setVisibility(View.GONE);
-                holder.setText(R.id.tv_audit_des_hint,"审核意见 {vac-down}");
-            }else {
-                tv_audit_des.setVisibility(View.VISIBLE);
-                holder.setText(R.id.tv_audit_des_hint,"审核意见 {vac-up}");
-            }
-
-        });
+        if(item.getInfo() != null && !item.getInfo().isEmpty())
+            tv_audit_des.setText(item.getInfo());
+        else
+            tv_audit_des.setText("无");
     }
 }

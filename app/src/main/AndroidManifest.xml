@@ -8,6 +8,7 @@
         android:icon="@mipmap/common_logo"
         android:theme="@style/CheckTheme"
         tools:replace="android:icon,android:label,android:theme"
+        tools:overrideLibrary="com.prolificinteractive.materialcalendarview"
         android:label="@string/common_app_name">
 
         <!--<activity android:name="com.cxyz.mains.activity.SplashActivity"-->

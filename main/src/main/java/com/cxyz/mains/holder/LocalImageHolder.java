@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.SpUtil;
+import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mains.R;
+import com.cxyz.mains.activity.HomeActivity;
 import com.cxyz.mains.activity.LoginActivity;
 
 /**
@@ -46,7 +48,10 @@ public class LocalImageHolder extends Holder<LocalImageHolder.Data> {
                 SpUtil instance = SpUtil.getInstance();
                 instance.putBoolean("isFirst",false);
                 instance.putString("versionName", AppUtil.getVersionName(context));
-                Intent intent = new Intent(context, LoginActivity.class);
+                Class clazz = LoginActivity.class;
+                if(UserManager.getInstance().isLogined())
+                    clazz = HomeActivity.class;
+                Intent intent = new Intent(context, clazz);
                 context.startActivity(intent);
             });
         }

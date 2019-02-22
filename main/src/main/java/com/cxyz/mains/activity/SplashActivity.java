@@ -3,8 +3,11 @@ package com.cxyz.mains.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,6 +35,8 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     private Timer timer = new Timer();
 
     private int times = 0;
+
+    private boolean flag = false;//判断是否为第一次启动
 
     private TextView tv_timer;
 
@@ -77,14 +82,23 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
                     times++;
                     if(times == 3)
                     {
-                        iPresenter.autoLogin();
                         autoLogined = true;
                         timer.cancel();
+                        if(!SpUtil.getInstance().getBoolean("isFirst",true) && SpUtil.getInstance().getString("versionName","0").equals(AppUtil.getVersionName(getActivity())))
+                        {
+                            flag = true;
+                            startActivity(LoginActivity.class);
+                            iPresenter.autoLogin();
+                            finish();
+                            return;
+                        }
+                        else
+                            iPresenter.autoLogin();
                     }
                     tv_timer.setText(3-times+"s 跳过");
                 });
             }
-        },0,1000);
+        },1000,1000);
         //初始化完成后根据sp中的update值选择更新或自动登录
         //iPresenter.autoLogin();
     }
@@ -102,16 +116,17 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     @Override
     public void autoLoginSuccess() {
         LogUtil.e(System.currentTimeMillis()+"");
-        startActivity(HomeActivity.class);
-        finish();
+        //如果不是是第一次打开就直接跳转至HomeActivity
+        if(!flag)
+        {
+            startActivity(HomeActivity.class);
+            finish();
+        }
     }
 
     @Override
     public void autoLoginFail(final String info) {
-        if(SpUtil.getInstance().getBoolean("isFirst",true) && !SpUtil.getInstance().getString("versionName","0").equals(AppUtil.getVersionName(getActivity())))
-            startActivity(FirstShowActivity.class);
-        else
-            startActivity(LoginActivity.class);
+        startActivity(FirstShowActivity.class);
         finish();
     }
 

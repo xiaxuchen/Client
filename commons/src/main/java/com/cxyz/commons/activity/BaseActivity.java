@@ -64,6 +64,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ContextManager.getRefWatcher().watch(this);
         if(eventBusEnable())
             EventBus.getDefault().register(this);
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onCreate");
@@ -299,8 +300,6 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     @Override
     protected void onDestroy() {
-        //注册LeakCanary
-        RefWatcher refWatcher = ContextManager.getRefWatcher();
         //注销EventBus
         if(eventBusEnable())
             EventBus.getDefault().unregister(this);
@@ -341,7 +340,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     protected IBaseView getIView()
     {
-        return new IDefaultView(getActivity(),"正在加载中...",false);
+        return new IDefaultView(getActivity());
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
 import com.cxyz.commons.R;
+import com.cxyz.commons.utils.LogUtil;
 
 
 public class ClearEditText extends android.support.v7.widget.AppCompatEditText implements

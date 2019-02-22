@@ -136,7 +136,7 @@ public class Date {
 			return str;
 		else if(str.length()<len)
 		{
-			for(int i = 0;i<len-str.length();i++)
+			while (str.length() != len)
 			{
 				str = "0"+str;
 			}

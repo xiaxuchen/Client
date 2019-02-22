@@ -3,14 +3,17 @@ package com.cxyz.vac.activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.date.DateTime;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.commons.widget.datetime.DateTimeSheet;
 import com.cxyz.logiccommons.typevalue.VacType;
 import com.cxyz.vac.R;
 import com.cxyz.vac.icon.IconfontModule;
@@ -22,9 +25,6 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
-import java.util.Calendar;
-
-import cn.addapp.pickers.picker.DateTimePicker;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 @Route(path = "/vac/VacateActivity")
@@ -54,8 +54,7 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
 
     private DateTime end;//结束时间
 
-    private int year;//开始的年
-
+    private LinearLayout ll_info;
 
     @Override
     public int getContentViewId() {
@@ -76,6 +75,7 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
         et_time_len = findViewById(R.id.et_time_len);
         btn_commit = findViewById(R.id.btn_commit);
         tv_title = findViewById(R.id.tv_title);
+        ll_info = findViewById(R.id.ll_info);
 
         toggleEnable();
     }
@@ -88,6 +88,15 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
         RelativeLayout rl_start = getParent(tv_vac_start);
         RelativeLayout rl_end = getParent(tv_vac_end);
         RelativeLayout rl_len = getParent(et_time_len);
+
+        if(ll_info.isEnabled())
+        {
+            ll_info.setEnabled(false);
+            ll_info.setAlpha(0.8f);
+        }else {
+            ll_info.setEnabled(true);
+            ll_info.setAlpha(1.0f);
+        }
 
         rl_start.setEnabled(!rl_start.isEnabled());
         rl_end.setEnabled(!rl_end.isEnabled());
@@ -140,8 +149,11 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
             else
             {
                 tv_vac_type.setText("请选择");
+                tv_vac_type.setTextColor(getResources().getColor(R.color.common_line));
                 tv_vac_start.setText("请选择");
+                tv_vac_start.setTextColor(getResources().getColor(R.color.common_line));
                 tv_vac_end.setText("请选择");
+                tv_vac_end.setTextColor(getResources().getColor(R.color.common_line));
                 tv_type_icon.setText("{vac-next}");
                 tv_start_icon.setText("{vac-next}");
                 tv_end_icon.setText("{vac-next}");
@@ -197,6 +209,7 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
         else
         {
             v.setText("请选择");
+            v.setTextColor(getResources().getColor(R.color.common_line));
             icon.setText("{vac-next}");
             if(v == tv_vac_start)
                 start = null;
@@ -212,32 +225,42 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
     private void showDatePicker(TextView tv,IconTextView icon)
     {
 
-        DateTimePicker picker = new DateTimePicker(getActivity(),DateTimePicker.HOUR_24);
-        Calendar c = Calendar.getInstance();
-        year = c.get(Calendar.YEAR);
-        picker.setDateRangeStart(year,1,1);
-        c.add(Calendar.DAY_OF_MONTH,10);
-        picker.setDateRangeEnd(c.get(Calendar.YEAR),12,31);
-        picker.setOnDateTimePickListener((DateTimePicker.OnYearMonthDayTimePickListener) (s, s1, s2, s3, s4) -> {
-            DateTime oldTime;
+        DateTimeSheet.Builder dialogBuilder = new DateTimeSheet.Builder(getActivity());
+        dialogBuilder.setOnConfirmListener((dialog, s, s1, s2, s3, s4) -> {
+            DateTime oldTime = null;
             icon.setText("{vac-clear}");
-            DateTime dateTime = new DateTime(s,s1,s2,s3,s4,"0");
-            if(tv.equals(tv_vac_start))
+            DateTime dateTime = new DateTime(s,s1,s2,s3,s4,0);
+            LogUtil.e(dateTime);
+            LogUtil.e(start+":"+end);
+            if(tv == tv_vac_start)
             {
-                oldTime = start;
+                if(start != null)
+                    try {
+                        oldTime = (DateTime) start.clone();
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                 start = dateTime;
             }
             else
             {
-                oldTime = end;
+                if(end != null)
+                    try {
+                        oldTime = (DateTime) end.clone();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 end = dateTime;
             }
+            LogUtil.e(start+":"+end);
             if(start == null || end == null)
             {
                 StringBuilder builder = new StringBuilder();
                 builder.append(s).append("-").append(s1).
                         append("-").append(s2).append(" ").append(s3).append(":").append(s4);
                 tv.setText(builder.toString());
+                tv.setTextColor(getResources().getColor(R.color.common_black));
+                dialog.dismiss();
                 return;
             }
             if(start.compareTo(end) != -1)
@@ -252,18 +275,19 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
                 {
                     end = oldTime;
                     if(oldTime == null)
-                        tv_start_icon.setText("{vac-next}");
+                        tv_end_icon.setText("{vac-next}");
                 }
                 ToastUtil.showShort("开始时间必须早于结束时间");
                 return;
             }
-
             StringBuilder builder = new StringBuilder();
             builder.append(s).append("-").append(s1).
                     append("-").append(s2).append(" ").append(s3).append(":").append(s4);
             tv.setText(builder.toString());
+            tv.setTextColor(getResources().getColor(R.color.common_black));
+            dialog.dismiss();
         });
-        picker.show();
+        dialogBuilder.build().show();
     }
 
 
@@ -275,6 +299,7 @@ public class VacateActivity extends BaseActivity<IVacatePresenter> implements IV
             if(tv_vac_type.getText().toString().equals("请选择"))
                 toggleEnable();
             tv_vac_type.setText(items[i]);
+            tv_vac_type.setTextColor(getResources().getColor(R.color.common_black));
             dialogInterface.cancel();
             tv_type_icon.setText("{vac-clear}");
         });

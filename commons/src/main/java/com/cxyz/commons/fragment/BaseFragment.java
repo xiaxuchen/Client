@@ -56,8 +56,6 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     protected boolean mIsVisible;
 
-    private IBaseView iBaseView;
-
     /**
      * 是否加载完成
      * 当执行完oncreatview,View的初始化方法后方法后即为true
@@ -73,9 +71,10 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        //注册leakcanary
+        ContextManager.getRefWatcher().watch(this);
         iPresenter = createIPresenter();
         super.onCreate(savedInstanceState);
-        iBaseView = getIView();
         if(iPresenter!=null)
             iPresenter.attachV(this);
     }
@@ -238,9 +237,6 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     @Override
     public void onDestroy() {
-        //注册leakcanary
-        RefWatcher refWatcher = ContextManager.getRefWatcher();
-        refWatcher.watch(this);
         if(iPresenter!=null)
         {
             iPresenter.detachV();
@@ -252,23 +248,12 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
 
     @Override
     public void showLoadingView() {
-        if(getIView() != null)
-        {
-            iBaseView.showLoadingView();
-        }
-    }
-
-    protected IBaseView getIView()
-    {
-        return new IDefaultView(getActivity(),"正在加载中...",false);
+        getHoldingActivity().showLoadingView();
     }
 
     @Override
     public void hideLoadingView() {
-        if(getIView() != null)
-        {
-            iBaseView.hideLoadingView();
-        }
+        getHoldingActivity().hideLoadingView();
     }
 
 }

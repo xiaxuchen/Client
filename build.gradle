@@ -2,12 +2,13 @@
 
 buildscript {
     repositories {
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven {
+            url '/'
+            name 'Google'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
@@ -17,20 +18,18 @@ buildscript {
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'//greenDao支持
 
         classpath "com.tinkerpatch.sdk:tinkerpatch-gradle-plugin:1.1.8"//tinker
-
     }
 }
 
 allprojects {
     repositories {
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        jcenter()
+        maven { url 'https://jitpack.io' }
         maven {
             url 'https://maven.google.com/'
             name 'Google'
         }
-        maven { url 'https://jitpack.io' }
-
-
-        jcenter()
     }
 }
 
@@ -41,7 +40,7 @@ task clean(type: Delete) {
 ext{
     compileSdkVersion = 26
     buildToolsVersion = "26.0.1"
-    minSdkVersion = 15
+    minSdkVersion = 16
     targetSdkVersion = 26
     versionCode = 1
     versionName = "1.0"
@@ -49,17 +48,4 @@ ext{
     //router
     routerVersion = "1.4.0"
     annotationProcessor = "1.2.1"
-}
-
-// 保证dex_files文件中指定的文件都加载到Main Dex中
-afterEvaluate {
-    tasks.matching {
-        it.name.startsWith('dex')
-    }.each { dx ->
-        if (dx.additionalParameters == null) {
-            dx.additionalParameters = []
-        }
-        dx.additionalParameters += '--multi-dex'
-        dx.additionalParameters += "--main-dex-list=$projectDir/dex_files".toString()
-    }
 }

@@ -32,11 +32,11 @@ public class BitmapUtil {
          * @param width     宽度
          * @return
          */
-        public static Bitmap getBitmapFromResource(Context context, int id, int height, int width){
+        public static Bitmap getBitmapFromResource(Context context, int id, Integer height, Integer width){
             Options options = new Options();
             options.inJustDecodeBounds = true;//只读取图片，不加载到内存中
             BitmapFactory.decodeResource(context.getResources(), id, options);
-            options.inSampleSize = calculateSampleSize(height, width, options);
+            options.inSampleSize = calculateSampleSize(height, width, options,context);
             options.inJustDecodeBounds = false;//加载到内存中
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id, options);
             return bitmap;
@@ -47,7 +47,7 @@ public class BitmapUtil {
             Options options = new Options();
             options.inJustDecodeBounds = true;//只读取图片，不加载到内存中
             BitmapFactory.decodeStream(is,null, options);
-            options.inSampleSize = calculateSampleSize(height, width, options);
+            options.inSampleSize = calculateSampleSize(height, width, options,context);
             options.inJustDecodeBounds = false;//加载到内存中
             Bitmap bitmap = BitmapFactory.decodeStream(is,null, options);
             return bitmap;
@@ -60,14 +60,14 @@ public class BitmapUtil {
          * @param width     宽度
          * @return
          */
-        public static Bitmap getBitmapFromFile(String path, int height, int width){
+        public static Bitmap getBitmapFromFile(String path, Integer height, Integer width,Context context){
             if (TextUtils.isEmpty(path)) {
                 throw new IllegalArgumentException("参数为空，请检查你选择的路径:" + path);
             }
             Options options = new Options();
             options.inJustDecodeBounds = true;//只读取图片，不加载到内存中
             BitmapFactory.decodeFile(path, options);
-            options.inSampleSize = calculateSampleSize(height, width, options);
+            options.inSampleSize = calculateSampleSize(height, width, options,context);
             options.inJustDecodeBounds = false;//加载到内存中
             Bitmap bitmap = BitmapFactory.decodeFile(path, options);
             return bitmap;
@@ -80,7 +80,7 @@ public class BitmapUtil {
          * @param width     宽度
          * @return
          */
-        public static Bitmap getThumbnailsBitmap(Bitmap bitmap, int height, int width){
+        public static Bitmap getThumbnailsBitmap(Bitmap bitmap, Integer height, Integer width){
             if (bitmap == null) {
                 throw new IllegalArgumentException("图片为空，请检查你的参数");
             }
@@ -141,9 +141,23 @@ public class BitmapUtil {
          * @param options   options选项
          * @return
          */
-        private static int calculateSampleSize(int height, int width, Options options){
+        private static int calculateSampleSize(Integer height, Integer width, Options options,Context context){
             int realHeight = options.outHeight;
             int realWidth = options.outWidth;
+            int screenWidth = ScreenUtil.getScreenWidth(context);
+            int screenHeight = ScreenUtil.getScreenHeight(context);
+            if(realWidth <= screenWidth)
+                return 1;
+
+            if(height == null)
+            {
+                height = screenHeight;
+            }
+            if(width == null)
+            {
+                width = screenWidth;
+            }
+
             int heigthScale = realHeight / height;
             int widthScale = realWidth / width;
             if(widthScale > heigthScale){

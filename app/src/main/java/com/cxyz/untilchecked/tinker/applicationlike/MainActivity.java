@@ -5,9 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.contrarywind.adapter.WheelAdapter;
+import com.contrarywind.listener.OnItemSelectedListener;
+import com.contrarywind.view.WheelView;
 import com.cxyz.commons.context.ContextManager;
-import com.cxyz.untilchecked.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -20,15 +26,6 @@ public class MainActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
-        init();
     }
 
-    private void init() {
-
-        EditText et_alia = findViewById(R.id.et_alia);
-        Button btn_change = findViewById(R.id.btn_change);
-
-        btn_change.setOnClickListener(view -> {
-        });
-    }
 }

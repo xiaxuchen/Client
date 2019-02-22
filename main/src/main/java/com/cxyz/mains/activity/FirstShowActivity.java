@@ -7,6 +7,8 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.mains.R;
 import com.cxyz.mains.holder.LocalImageHolder;
 
@@ -18,6 +20,8 @@ import java.util.List;
  */
 
 public class FirstShowActivity extends BaseActivity {
+
+    Long flags[] = new Long[2];
 
     private ConvenientBanner cb_banner;
 
@@ -62,5 +66,29 @@ public class FirstShowActivity extends BaseActivity {
     @Override
     protected IBasePresenter createIPresenter() {
         return null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(flags[0]==null)
+        {
+            flags[0] = System.currentTimeMillis();
+            ToastUtil.showShort("再按一次返回退出应用");
+        }
+        else{
+            if(flags[1]==null)
+                flags[1] = System.currentTimeMillis();
+            else if(flags[0]>=flags[1])
+                    flags[1]=System.currentTimeMillis();
+            else
+                    flags[0]=System.currentTimeMillis();
+
+            if(Math.abs(flags[0]-flags[1])<=2000)
+                super.onBackPressed();
+            else
+                ToastUtil.showShort("再按一次返回退出应用");
+            LogUtil.e(Math.abs(flags[0]-flags[1]));
+        }
+
     }
 }

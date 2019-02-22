@@ -5,13 +5,23 @@ import com.cxyz.commons.utils.LogUtil;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-public class DateTime extends Date{
+public class DateTime extends Date implements Cloneable{
 	private String hour = "00";
 	private String minute = "00";
 	private String second = "00";
 
 
 	public DateTime(){}
+
+	public DateTime(int year,int month,int day,int hour, int minute, int second)
+	{
+		setYear(year);
+		setMonth(month);
+		setDay(day);
+		setHour(hour);
+		setMinute(minute);
+		setSecond(second);
+	}
 
 	public DateTime(String year,String month,String day,String hour, String minute, String second) {
 		setYear(year);
@@ -29,6 +39,8 @@ public class DateTime extends Date{
 	 */
 	public int compareTo(DateTime anOther)
 	{
+		LogUtil.d(this.toString());
+		LogUtil.d(anOther.toString());
 		if(toInt(getYear())>toInt(anOther.getYear()))
 			return 1;
 		else if(toInt(getYear())<toInt(anOther.getYear()))
@@ -67,6 +79,8 @@ public class DateTime extends Date{
 			}
 		}
 	}
+
+
 
 	/**
 	 * 默认加上1900年
@@ -216,10 +230,7 @@ public class DateTime extends Date{
 	 */
 	public Timestamp toTimeStamp()
 	{
-		Calendar calendar = Calendar.getInstance();
-		calendar.clear();
-		calendar.set(2018,0,1,0,0,0);
-		return new Timestamp(calendar.getTimeInMillis());
+		return new Timestamp(getTimeInMillis());
 	}
 
 	/**
@@ -228,11 +239,9 @@ public class DateTime extends Date{
 	 */
 	public Long getTimeInMillis()
 	{
-		LogUtil.e(getYear()+getMonth()+getDay()+getHour()+getMinute());
 		Calendar calendar = Calendar.getInstance();
 		calendar.clear();
-		calendar.set(2018,0,1,0,0,0);
-		LogUtil.e(calendar.getTime().toLocaleString());
+		calendar.set(toInt(getYear()),toInt(getMonth())-1,toInt(getDay()),toInt(getHour()),toInt(getMinute()),toInt(getSecond()));
 		return calendar.getTimeInMillis();
 	}
 
@@ -250,5 +259,41 @@ public class DateTime extends Date{
 	{
 		return Integer.parseInt(s);
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof DateTime)) return false;
+
+		DateTime dateTime = (DateTime) o;
+
+		if (getYear() != null ? !getYear().equals(dateTime.getYear()) : dateTime.getYear() != null)
+			return false;
+		if (getMonth() != null ? !getMonth().equals(dateTime.getMonth()) : dateTime.getMonth() != null)
+			return false;
+		if (getDay() != null ? !getDay().equals(dateTime.getDay()) : dateTime.getDay() != null)
+			return false;
+		if (getHour() != null ? !getHour().equals(dateTime.getHour()) : dateTime.getHour() != null)
+			return false;
+		if (getMinute() != null ? !getMinute().equals(dateTime.getMinute()) : dateTime.getMinute() != null)
+			return false;
+		return getSecond() != null ? getSecond().equals(dateTime.getSecond()) : dateTime.getSecond() == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getYear() != null ? getYear().hashCode() : 0;
+		result = 31 * result + (getMonth() != null ? getMonth().hashCode() : 0);
+		result = 31 * result + (getDay() != null ? getDay().hashCode() : 0);
+		result = 31 * result + (getHour() != null ? getHour().hashCode() : 0);
+		result = 31 * result + (getMinute() != null ? getMinute().hashCode() : 0);
+		result = 31 * result + (getSecond() != null ? getSecond().hashCode() : 0);
+		return result;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		DateTime dateTime = new DateTime(getYear(),getMonth(),getDay(),getHour(),getMinute(),getSecond());
+		return dateTime;
+	}
 }

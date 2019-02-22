@@ -1,9 +1,11 @@
 package com.cxyz.vac.activity;
 
+import android.content.Intent;
 import android.widget.ListView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.vac.R;
@@ -14,6 +16,10 @@ import com.cxyz.vac.ipresenter.IMineVacatePresenter;
 import com.cxyz.vac.ipresenter.impl.IMineVacatePresenterImpl;
 import com.cxyz.vac.iview.IMineVacateView;
 import com.joanzapata.iconify.Iconify;
+import com.vincent.filepicker.Constant;
+import com.vincent.filepicker.filter.entity.ImageFile;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -69,6 +75,28 @@ public class MineVacateActivity extends BaseActivity<IMineVacatePresenter> imple
         if(adapter == null)
             adapter = new VacateAdapter(getActivity(),vacateDtos,R.layout.item_vacate_layout);
         lv_vacates.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtil.e(requestCode == Constant.REQUEST_CODE_PICK_IMAGE);
+        switch (requestCode)
+        {
+            case Constant.REQUEST_CODE_PICK_IMAGE:
+            {
+                LogUtil.e(resultCode == RESULT_OK);
+                if(resultCode == RESULT_OK)
+                {
+                    List<ImageFile> selected = data.getParcelableArrayListExtra(Constant.RESULT_PICK_IMAGE);
+                    LogUtil.e(selected);
+                    for (ImageFile file:selected)
+                    {
+                        String path = file.getPath();
+                    }
+                }
+                break;
+            }
+        }
     }
 
     @Override

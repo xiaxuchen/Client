@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.application.BaseApplication;
+import com.cxyz.commons.context.ContextManager;
 import com.cxyz.commons.utils.CrashHandler;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.SpUtil;
@@ -39,6 +40,7 @@ public class MyApp extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         attributes = new HashMap<>();
+        ContextManager.setContext(this);
         initToast();
         initCrach();
         initSpUtil();

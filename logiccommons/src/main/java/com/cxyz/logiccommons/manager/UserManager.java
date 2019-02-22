@@ -8,6 +8,7 @@ import com.cxyz.logiccommons.domain.User;
 import com.cxyz.logiccommons.service.PushService;
 import com.cxyz.logiccommons.typevalue.PowerType;
 import com.cxyz.logiccommons.typevalue.UserType;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 
 
 /**
@@ -75,11 +76,11 @@ public class UserManager {
         User u = new User();
         u.setGradeId(1702);
         u.setName("夏旭晨");
-        u.setId("16478040");
+        u.setId("17478093");
         u.setGradeName("17软工二班");
         u.setCollegeName("信息与计算机工程学院");
-        u.setPower(PowerType.TEA_NORMAL);
-        u.setType(UserType.TEACHER);
+        u.setPower(PowerType.STU_CHECKER);
+        u.setType(UserType.STUDENT);
         return u;
     }
 

@@ -141,7 +141,7 @@ public class ViewHolder {
      * @param resId 资源id
      * @return this
      */
-    public ViewHolder setImageResource(int viewId, int resId) {
+    public ViewHolder setImageResource(int viewId, int resId)  {
         ImageView view = getView(viewId);
         view.setImageResource(resId);
         return this;

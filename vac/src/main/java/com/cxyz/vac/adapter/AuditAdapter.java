@@ -48,18 +48,10 @@ public class AuditAdapter extends AdapterBase<VacateDto>{
 
         IconTextView tv_reason_hint = holder.getView(R.id.tv_reason_hint);
         TextView tv_reason = holder.getView(R.id.tv_reason);
-        tv_reason.setText(item.getDes());
-        tv_reason_hint.setOnClickListener(view ->{
-            Integer visible = View.VISIBLE;
-            if(tv_reason.getVisibility() == View.VISIBLE)
-            {
-                visible = View.GONE;
-                tv_reason_hint.setText("请假事由 {vac-down}");
-            }else {
-                tv_reason_hint.setText("请假事由 {vac-up}");
-            }
-            tv_reason.setVisibility(visible);
-        });
+        if(item.getDes() != null && !item.getDes().isEmpty())
+            tv_reason.setText(item.getDes());
+        else
+            tv_reason.setText("无");
         int state = item.getState();
         Button btn_audited = holder.getView(R.id.btn_audited);
         Button btn_accept = holder.getView(R.id.btn_accept);

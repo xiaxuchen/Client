@@ -1,20 +1,32 @@
 package com.cxyz.vac.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cxyz.commons.Adapter.AdapterBase;
 import com.cxyz.commons.Adapter.ViewHolder;
+import com.cxyz.commons.utils.BitmapUtil;
 import com.cxyz.commons.utils.DateUtil;
+import com.cxyz.commons.utils.ImageLoaderManager;
+import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.commons.utils.ScreenUtil;
+import com.cxyz.commons.widget.imageview.CancelableImageView;
+import com.cxyz.commons.widget.imageview.listener.OnCancelClickListener;
+import com.cxyz.logiccommons.domain.Photo;
 import com.cxyz.logiccommons.typevalue.AuditState;
 import com.cxyz.logiccommons.typevalue.VacType;
 import com.cxyz.vac.R;
 import com.cxyz.vac.dto.VacateDto;
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +34,7 @@ import java.util.List;
  * Created by Administrator on 2018/12/31.
  */
 
-public class VacateAdapter extends AdapterBase<VacateDto> {
+public class VacateAdapter extends AdapterBase<VacateDto> implements OnCancelClickListener{
 
     public VacateAdapter(Context mContext, List<VacateDto> list, int... mItemLayoutId) {
         super(mContext, list, mItemLayoutId);
@@ -40,20 +52,11 @@ public class VacateAdapter extends AdapterBase<VacateDto> {
         holder.setText(R.id.tv_len,item.getLen()+"天");
         holder.setText(R.id.tv_vac_type,item.getType()== VacType.VAC_THING?"事假":"病假");
 
-        IconTextView tv_reason_hint = holder.getView(R.id.tv_reason_hint);
         TextView tv_reason = holder.getView(R.id.tv_reason);
-        tv_reason.setText(item.getDes());
-        tv_reason_hint.setOnClickListener(view ->{
-            Integer visible = View.VISIBLE;
-            if(tv_reason.getVisibility() == View.VISIBLE)
-            {
-                visible = View.GONE;
-                tv_reason_hint.setText("请假事由 {vac-down}");
-            }else {
-                tv_reason_hint.setText("请假事由 {vac-up}");
-            }
-            tv_reason.setVisibility(visible);
-        });
+        if(item.getDes() != null && !item.getDes().isEmpty())
+            tv_reason.setText(item.getDes());
+        else
+            tv_reason.setText("无");
         int state = item.getState();
         Button btn_audited = holder.getView(R.id.btn_audited);
         if( state == AuditState.WAIT_AUDIT)
@@ -83,6 +86,18 @@ public class VacateAdapter extends AdapterBase<VacateDto> {
                 holder.setText(R.id.tv_audits_hint,"审核情况 {vac-up}");
             }
         } );
+        //准备图片的数据
+        List<MineVacPhotoAdapter.PhotoDto> photoDtos = new ArrayList<>();
+        for(Photo photo : item.getPhotos())
+            photoDtos.add(new MineVacPhotoAdapter.PhotoDto(photo, MineVacPhotoAdapter.PhotoDto.INTERNET));
+        //设置适配器
+        GridView gv_imgs = holder.getView(R.id.gv_imgs);
+        gv_imgs.setAdapter(new MineVacPhotoAdapter(getContext(),photoDtos,item.getId()));
+    }
 
+    @Override
+    public void onCancelClick(CancelableImageView iv) {
+        LinearLayout ll_imgs = (LinearLayout) iv.getParent();
+        ll_imgs.removeView(iv);
     }
 }

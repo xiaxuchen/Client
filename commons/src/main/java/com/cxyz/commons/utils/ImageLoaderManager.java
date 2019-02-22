@@ -63,8 +63,8 @@ public class ImageLoaderManager {
     private DisplayImageOptions getDefaultOptions()
     {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.ic_launcher)//设置加载之前的显示的图片
-                .showImageOnFail(R.mipmap.ic_launcher)//加载失败显示的图片
+                .showImageForEmptyUri(R.mipmap.common_img_loading)//设置加载之前的显示的图片
+                .showImageOnFail(R.mipmap.common_img_load_fail)//加载失败显示的图片
                 .cacheInMemory(true)//设置内存缓存可用
                 .cacheOnDisk(true)//设置磁盘缓存可用
                 .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码方式
@@ -80,7 +80,7 @@ public class ImageLoaderManager {
      * @param url 加载图片的路径
      */
     public void displayImage(ImageView imageView, String url){
-        displayImage(imageView,url,null,null);
+        displayImage(imageView,url,getDefaultOptions(),null);
     }
 
     /**
@@ -91,8 +91,9 @@ public class ImageLoaderManager {
      * @param listener 回调的listener
      */
     public void displayImage(ImageView imageView, String url, DisplayImageOptions options, ImageLoadingListener listener){
-        if(mImageLoader!=null)
-            mImageLoader.displayImage(url,imageView,options,listener);
+        if(mImageLoader == null)
+            options = getDefaultOptions();
+        mImageLoader.displayImage(url,imageView,options,listener);
     }
 
     /**
