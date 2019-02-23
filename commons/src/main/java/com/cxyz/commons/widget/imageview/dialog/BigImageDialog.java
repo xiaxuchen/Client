@@ -56,23 +56,27 @@ public class BigImageDialog extends Dialog {
             this.context = context;
         }
 
-        public void setResourceUrl(String url)
+        public Builder setResourceUrl(String url)
         {
             this.resourceUrl = url;
+            return this;
         }
 
-        public void setResource(Bitmap resource) {
+        public Builder setResource(Bitmap resource) {
             this.resource = resource;
+            return this;
         }
 
-        public void setResource(Drawable drawable)
+        public Builder setResource(Drawable drawable)
         {
             setResource(BitmapUtil.drawableToBitmap(drawable));
+            return this;
         }
 
-        public void setResource(int resource)
+        public Builder setResource(int resource)
         {
             setResource(BitmapUtil.getBitmapFromResource(context,resource,null,null));
+            return this;
         }
 
         public BigImageDialog build()

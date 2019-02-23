@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/vac_audit_background"
     android:layout_height="wrap_content"
-    android:paddingBottom="16dp">
+    android:paddingBottom="8dp">
 
+    <TextView
+        android:id="@+id/tv_type"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="请假条"
+        android:textColor="@color/common_white"
+        android:background="@drawable/vac_type_vac_photo_background_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/tv_audit_state_hint"
@@ -135,7 +153,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/gray"
         android:text="图片"
-        app:layout_constraintTop_toBottomOf="@+id/tv_audits_hint"
+        app:layout_constraintTop_toBottomOf="@+id/lv_audits"
         app:layout_constraintLeft_toLeftOf="@+id/tv_audits_hint"
         />
 
@@ -177,7 +195,7 @@
         android:layout_marginTop="16dp"
         android:text="2018-12-12 10:10"
         android:textColor="@color/gray"
-        app:layout_constraintTop_toBottomOf="@+id/ll_imgs"
+        app:layout_constraintTop_toBottomOf="@+id/gv_imgs"
         app:layout_constraintLeft_toLeftOf="@+id/tv_len_hint"
         />
 

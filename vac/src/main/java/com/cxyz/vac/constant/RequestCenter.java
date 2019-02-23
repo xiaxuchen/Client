@@ -11,6 +11,7 @@ import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.constant.Constant;
 import com.cxyz.logiccommons.domain.CheckResult;
+import com.cxyz.logiccommons.domain.Photo;
 import com.cxyz.logiccommons.domain.Vacate;
 import com.cxyz.vac.dto.VacateDto;
 import com.google.gson.reflect.TypeToken;
@@ -19,6 +20,7 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -185,13 +187,13 @@ public class RequestCenter {
      * @param listener 监听
      * @return
      */
-    public static Call uploadPhoto(int id, File file, DisposeDataListener listener)
+    public static Call uploadPhoto(int id, File files[], DisposeDataListener listener)
     {
         RequestParams params = new RequestParams();
         params.put("id",id+"");
-        params.put("file",file);
+        params.put("files",files);
         try {
-            return CommonOkHttpClient.uploadFile(NetWorkConstant.UPLOAD_PHOTO,params,new DisposeDataHandler(listener,new TypeToken<CheckResult<Integer>>(){}.getType()));
+            return CommonOkHttpClient.uploadFile(NetWorkConstant.UPLOAD_PHOTO,params,new DisposeDataHandler(listener,new TypeToken<CheckResult<List<Photo>>>(){}.getType()));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");

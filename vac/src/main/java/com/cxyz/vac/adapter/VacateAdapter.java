@@ -22,6 +22,7 @@ import com.cxyz.commons.widget.imageview.listener.OnCancelClickListener;
 import com.cxyz.logiccommons.domain.Photo;
 import com.cxyz.logiccommons.typevalue.AuditState;
 import com.cxyz.logiccommons.typevalue.VacType;
+import com.cxyz.logiccommons.typevalue.VacateType;
 import com.cxyz.vac.R;
 import com.cxyz.vac.dto.VacateDto;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -49,7 +50,13 @@ public class VacateAdapter extends AdapterBase<VacateDto> implements OnCancelCli
                 DateUtil.DatePattern.ONLY_MINUTE));
         holder.setText(R.id.tv_sponsor_time,DateUtil.dateToString(new Date(item.getSponsorTime().getTime()),
                 DateUtil.DatePattern.ONLY_MINUTE));
-        holder.setText(R.id.tv_len,item.getLen()+"天");
+        if(item.getLen() != null)
+            holder.setText(R.id.tv_len,item.getLen()+"天");
+        else
+        {
+            holder.setVisible(R.id.tv_len_hint,View.GONE);
+            holder.setVisible(R.id.tv_len, View.GONE);
+        }
         holder.setText(R.id.tv_vac_type,item.getType()== VacType.VAC_THING?"事假":"病假");
 
         TextView tv_reason = holder.getView(R.id.tv_reason);
@@ -59,16 +66,23 @@ public class VacateAdapter extends AdapterBase<VacateDto> implements OnCancelCli
             tv_reason.setText("无");
         int state = item.getState();
         Button btn_audited = holder.getView(R.id.btn_audited);
-        if( state == AuditState.WAIT_AUDIT)
+        if(state == AuditState.ONLY_VACATE)
         {
-            btn_audited.setText("待审核");
-        }else if(state == AuditState.FAIL)
-        {
-            btn_audited.setText("已拒绝");
-        }
-        else if(state == AuditState.SUCCESS)
-        {
-            btn_audited.setText("已同意");
+            holder.setVisible(R.id.tv_type,View.VISIBLE);
+            btn_audited.setVisibility(View.GONE);
+        }else {
+            if( state == AuditState.WAIT_AUDIT)
+            {
+                btn_audited.setText("待审核");
+            }else if(state == AuditState.FAIL)
+            {
+                btn_audited.setText("已拒绝");
+            }
+            else if(state == AuditState.SUCCESS) {
+                btn_audited.setText("已同意");
+            }
+            btn_audited.setVisibility(View.VISIBLE);
+            holder.setVisible(R.id.tv_type,View.GONE);
         }
         ListView lv_audits = holder.getView(R.id.lv_audits);
         if(item.getAudits().size() == 0)
