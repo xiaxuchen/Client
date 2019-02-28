@@ -20,7 +20,6 @@ import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mine.IPresenter.IMineFragmentPresenter;
 import com.cxyz.mine.IPresenter.impl.IMineFragmentPresenterlmpl;
 import com.cxyz.mine.R;
-import com.cxyz.mine.imodel.IMineFragmentModel;
 import com.cxyz.mine.iview.IMineFragementView;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
@@ -41,7 +40,7 @@ public class OtherSettingActivity extends BaseActivity<IMineFragmentPresenter> i
     private ProgressBar pb_pro;
     @Override
     public int getContentViewId() {
-        return R.layout.othersetting_layout;
+        return R.layout.activity_othersetting_layout;
     }
 
     @Override

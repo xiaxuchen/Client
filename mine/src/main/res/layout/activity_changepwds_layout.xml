@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#eeeeee"
+    android:layout_height="match_parent">
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_change_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.cxyz.commons.widget.TitleView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置新的登入密码"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"/>
+
+
+    <!--<android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.PasswordEditText
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="6-20位数字/字母/符号组合"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:gravity="center|left"
+            android:background="@drawable/linerlayout_shapecolor"
+            android:inputType="textPassword"/>
+    </android.support.design.widget.TextInputLayout>-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <com.maksim88.passwordedittext.PasswordEditText
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="6-20位数字/字母/符号组合"
+        android:textSize="20sp"
+        android:gravity="start|center_vertical"
+        android:background="@drawable/linerlayout_shapecolor"
+        android:inputType="textPassword"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp">
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/bt_change_finish"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:qmui_radius="8dp"
+            android:layout_weight="1"
+            android:text="完成"
+            android:textColor="#fff"
+            app:qmui_backgroundColor="#0aa0ff" />
+    </LinearLayout>
+</LinearLayout>

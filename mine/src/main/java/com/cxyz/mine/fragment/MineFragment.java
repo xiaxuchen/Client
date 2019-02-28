@@ -1,6 +1,5 @@
 package com.cxyz.mine.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -11,15 +10,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.domain.User;
+import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mine.IPresenter.IMineFragmentPresenter;
 import com.cxyz.mine.IPresenter.impl.IMineFragmentPresenterlmpl;
 import com.cxyz.mine.R;
 import com.cxyz.mine.activity.ChangePwdACtivity;
+import com.cxyz.mine.activity.ConfirmChangeActivity;
 import com.cxyz.mine.activity.MyinfoActivity;
 import com.cxyz.mine.activity.OtherSettingActivity;
 import com.cxyz.mine.activity.UserResponse;
@@ -41,13 +45,15 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     private RelativeLayout ll_mine_info;
     private Dialog dialog;
     private ProgressBar pb_pro;
+    private TextView tv_mine_name;
+    private TextView  tv_mine_code;
     public static MineFragment newInstance() {
         return new MineFragment();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.minelayoutmore;
+        return R.layout.fragment_mines_layout;
     }
 
     @Override
@@ -56,6 +62,9 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
+        User u = UserManager.getInstance().getUser();
+        tv_mine_name=findViewById(R.id.tv_mine_name);
+        tv_mine_code=findViewById(R.id.tv_mine_code);
         iv_mine_othersetting=findViewById(R.id.iv_mine_othersetting);
         ll_mine_pc=findViewById(R.id.ll_mine_pc);
         ll_mine_update=findViewById(R.id.ll_mine_update);
@@ -65,6 +74,8 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
         ll_mine_info=findViewById(R.id.ll_mine_info);
         iv_mine_pic.setImageResource(R.mipmap.belief);
         iv_mine_pic.setCircle(true);
+        tv_mine_name.setText(u.getName());
+        tv_mine_code.setText(u.getId());
     }
 
     @Override
@@ -77,6 +88,7 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
         ll_mine_info.setOnClickListener(this);
         ll_mine_update.setOnClickListener(this);
         iv_mine_othersetting.setOnClickListener(this);
+        ll_mine_resetpwd.setOnClickListener(this);
     }
 
     //监听事件
@@ -98,7 +110,7 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
     }
     //从我的界面跳转到修改密码界面
     public void ll_mine_resetpwd() {
-        Intent intent = new Intent(getActivity().getApplicationContext(), ChangePwdACtivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), ConfirmChangeActivity.class);
         startActivity(intent);
         mActivity.overridePendingTransition(R.anim.enter_next, R.anim.enter_exit);
     }
@@ -119,6 +131,9 @@ public class MineFragment extends BaseFragment<IMineFragmentPresenter> implement
             iv_mine_othersetting();
         else  if (viewId==R.id.ll_mine_update){
             ll_mine_update();
+        }
+        else if (viewId==R.id.ll_mine_resetpwd){
+            ll_mine_resetpwd();
         }
     }
     public void ll_mine_update(){
