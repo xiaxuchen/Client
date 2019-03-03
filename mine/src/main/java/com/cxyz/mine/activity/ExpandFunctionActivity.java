@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.commons.widget.imageview.CircleImage;
 import com.cxyz.mine.R;
 
 /**
@@ -16,7 +17,7 @@ import com.cxyz.mine.R;
 
 public class ExpandFunctionActivity extends BaseActivity {
     private TitleView tv_expand_title;
-    private  CircleImage  iv_expandfun_notice;
+    private CircleImage iv_expandfun_notice;
     private  CircleImage  iv_expandfun_classsight;
     private CircleImage   iv_expandfun_member;
     private CircleImage  iv_expandfun_communication;

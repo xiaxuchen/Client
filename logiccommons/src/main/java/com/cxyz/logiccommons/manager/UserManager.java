@@ -17,6 +17,8 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
  */
 public class UserManager {
 
+    private User u;
+
 
     public User getUser() {
         return u;
@@ -55,15 +57,13 @@ public class UserManager {
         return getUser() != null;
     }
 
-    private User u=getFakeUser();
-
-    private static UserManager userManager;
-
     public static UserManager getInstance()
     {
-        if(userManager == null)
-            userManager = new UserManager();
-        return userManager;
+        return InnerClass.userManager;
+    }
+
+    private static class InnerClass{
+        private static UserManager userManager = new UserManager();
     }
 
     /**

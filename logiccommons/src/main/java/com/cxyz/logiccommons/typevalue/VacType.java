@@ -9,4 +9,5 @@ public interface VacType {
     Integer VAC_ILLNESS = 0;
     //事假
     Integer VAC_THING = 1;
+
 }

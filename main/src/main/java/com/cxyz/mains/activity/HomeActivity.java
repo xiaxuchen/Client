@@ -1,6 +1,5 @@
 package com.cxyz.mains.activity;
 
-import android.os.SystemClock;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -11,12 +10,12 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.activity.FragmentActivity;
+import com.cxyz.commons.dialog.DialogFactory;
 import com.cxyz.commons.fragment.BaseFragment;
 import com.cxyz.commons.utils.LogUtil;
-import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.commons.widget.TitleView;
 import com.cxyz.mains.R;
-import com.cxyz.mains.adapter.FragmentAdapter;
+import com.cxyz.logiccommons.adapter.FragmentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +92,6 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         fragmentList.add(getFragment("/check/MyCheckFragment"));
         fragmentList.add(getFragment("/homepage/HomeFragment"));
         fragmentList.add(getFragment("/mine/MineFragment"));
-        int i = 0;
         ids = new int[]{R.id.ll_check,R.id.ll_home,R.id.ll_mine};
         //初始化pagerAdapter
         pagerAdapter = new FragmentAdapter(getFragmentManager()) {
@@ -216,25 +214,26 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        if(flags[0]==null)
-        {
-            flags[0] = System.currentTimeMillis();
-            ToastUtil.showShort("再按一次返回退出应用");
-        }
-        else{
-            if(flags[1]==null)
-                flags[1] = System.currentTimeMillis();
-            else if(flags[0]>=flags[1])
-                flags[1]=System.currentTimeMillis();
-            else
-                flags[0]=System.currentTimeMillis();
-
-            if(Math.abs(flags[0]-flags[1])<=2000)
-                super.onBackPressed();
-            else
-                ToastUtil.showShort("再按一次返回退出应用");
-            LogUtil.e(Math.abs(flags[0]-flags[1]));
-        }
+        DialogFactory.showExitDialog(getActivity());
+//        if(flags[0]==null)
+//        {
+//            flags[0] = System.currentTimeMillis();
+//            ToastUtil.showShort("再按一次返回退出应用");
+//        }
+//        else{
+//            if(flags[1]==null)
+//                flags[1] = System.currentTimeMillis();
+//            else if(flags[0]>=flags[1])
+//                flags[1]=System.currentTimeMillis();
+//            else
+//                flags[0]=System.currentTimeMillis();
+//
+//            if(Math.abs(flags[0]-flags[1])<=2000)
+//                super.onBackPressed();
+//            else
+//                ToastUtil.showShort("再按一次返回退出应用");
+//            LogUtil.e(Math.abs(flags[0]-flags[1]));
+//        }
 
     }
 }

@@ -506,7 +506,7 @@ public class DailyCheckActivity extends BaseActivity<IDailyPresenter> implements
 
     @Override
     protected IBaseView getIView() {
-        return new IDefaultView(getActivity(), "正在提交", false);
+        return new IDefaultView(getActivity());
     }
 
 }

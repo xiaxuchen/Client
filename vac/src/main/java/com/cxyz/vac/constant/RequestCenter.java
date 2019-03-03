@@ -183,7 +183,7 @@ public class RequestCenter {
     /**
      * 上传图片
      * @param id 请假id
-     * @param file 图片
+     * @param files 图片
      * @param listener 监听
      * @return
      */
@@ -197,6 +197,26 @@ public class RequestCenter {
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
+        }
+        return null;
+    }
+
+    /**
+     * 获取请假信息及照片
+     * @param gradeId 班级id
+     * @param from 开始时间
+     * @param to 结束时间
+     */
+    public static Call getVacatesInDates(Integer gradeId,String from,String to,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("gradeId",gradeId.toString());
+        map.put("from",from);
+        map.put("to",to);
+        try {
+            return CommonOkHttpClient.get(NetWorkConstant.GET_VACATE_IN_DATES,new RequestParams(map),new DisposeDataHandler(listener,new TypeToken<CheckResult<List<Vacate>>>(){}.getType()));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
         }
         return null;
     }

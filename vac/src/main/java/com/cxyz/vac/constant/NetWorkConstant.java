@@ -48,4 +48,9 @@ public interface NetWorkConstant {
      * 上传图片
      */
     String UPLOAD_PHOTO = Constant.ROOT_URL+"/vacate/uploadPhoto";
+
+    /**
+     * 获取一定时间的请假信息（主要是请假条图片）
+     */
+    String GET_VACATE_IN_DATES = Constant.ROOT_URL+"/vacate/getVacateInDates";
 }

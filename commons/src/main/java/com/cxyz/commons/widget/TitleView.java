@@ -48,7 +48,7 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     //返回的icon，更多的icon
     private int backRes = R.mipmap.common_title_back,moreRes = 0;
 
-    private int background = R.color.common_primary_color;
+    private int background = R.drawable.view_title_shadow_layer;
 
     //相应的颜色
     private int backColor,moreColor,titleColor;

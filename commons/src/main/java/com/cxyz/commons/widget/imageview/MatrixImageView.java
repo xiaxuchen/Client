@@ -112,6 +112,7 @@ public class MatrixImageView extends ImageView implements ViewTreeObserver.OnGlo
                 }
                 return false;
             }
+
         });
         setOnTouchListener(this);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -510,6 +511,11 @@ public class MatrixImageView extends ImageView implements ViewTreeObserver.OnGlo
     public void setImageResource(int resId) {
         reSetState();
         super.setImageResource(resId);
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     /**

@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.IView.IBaseView;
-import com.cxyz.commons.IView.IDefaultView;
+import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.context.ContextManager;
 import com.cxyz.commons.utils.LogUtil;
-import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
@@ -82,7 +81,8 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.mActivity = (FragmentActivity) activity;
+        if(activity instanceof FragmentActivity)
+            this.mActivity = (FragmentActivity) activity;
     }
 
     /**
@@ -112,6 +112,7 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
         mIsPrepare = true;
         onLazyLoad();
         setListener();
+        afterInit();
         return mRootView;
     }
 
@@ -144,6 +145,11 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     protected abstract void setListener();
 
+    /**
+     * 初始化完成回调
+     */
+    protected void afterInit(){}
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -174,12 +180,18 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      * @param <T>
      * @return
      */
-    @SuppressWarnings("unchecked")
     protected <T extends View> T findViewById(int id) {
         if (mRootView == null) {
             return null;
         }
         return (T) mRootView.findViewById(id);
+    }
+
+    protected ViewGroup getParent(View view)
+    {
+        if(view.getParent() == null)
+            return null;
+        return (ViewGroup) view.getParent();
     }
 
     /**
@@ -248,12 +260,14 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
 
     @Override
     public void showLoadingView() {
-        getHoldingActivity().showLoadingView();
+        if(getActivity() instanceof BaseActivity)
+            ((BaseActivity)getActivity()).showLoadingView();
     }
 
     @Override
     public void hideLoadingView() {
-        getHoldingActivity().hideLoadingView();
+        if(getActivity() instanceof BaseActivity)
+            ((BaseActivity)getActivity()).hideLoadingView();
     }
 
 }

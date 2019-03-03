@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.StringUtil;
 import com.cxyz.commons.widget.TitleView;
+import com.cxyz.commons.widget.imageview.CircleImage;
 import com.cxyz.logiccommons.domain.College;
 import com.cxyz.logiccommons.domain.Grade;
 import com.cxyz.logiccommons.domain.User;

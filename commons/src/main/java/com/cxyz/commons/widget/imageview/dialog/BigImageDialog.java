@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bm.library.PhotoView;
 import com.cxyz.commons.R;
 import com.cxyz.commons.utils.BitmapUtil;
 import com.cxyz.commons.utils.ImageLoaderManager;
@@ -45,9 +46,9 @@ public class BigImageDialog extends Dialog {
 
         private BigImageDialog dialog;
 
-        private ImageView iv;
+        private PhotoView iv;
 
-        private Bitmap resource;
+        private Drawable resource;
 
         private String resourceUrl;
 
@@ -63,13 +64,13 @@ public class BigImageDialog extends Dialog {
         }
 
         public Builder setResource(Bitmap resource) {
-            this.resource = resource;
+            setResource(BitmapUtil.bitmapToDrawable(context,resource));
             return this;
         }
 
         public Builder setResource(Drawable drawable)
         {
-            setResource(BitmapUtil.drawableToBitmap(drawable));
+            this.resource = drawable;
             return this;
         }
 
@@ -83,14 +84,13 @@ public class BigImageDialog extends Dialog {
         {
             dialog = new BigImageDialog(context);
             View v = View.inflate(context, R.layout.dialog_big_image_layout, null);
-            v.setOnClickListener(view -> {
-                dialog.cancel();
-            });
             dialog.setContentView(v);
             iv = v.findViewById(R.id.iv);
-            iv.setOnClickListener(view -> dialog.cancel());
+            iv.enable();
             if(resource != null)
-                iv.setImageBitmap(resource);
+                iv.setImageDrawable(resource);
+            iv.setOnClickListener(view -> dialog.cancel());
+
             if(resourceUrl != null)
                 ImageLoaderManager.getInstance(context).displayImage(iv, resourceUrl, new ImageLoadingListener() {
                     @Override
@@ -101,19 +101,21 @@ public class BigImageDialog extends Dialog {
 
                     @Override
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                        iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
                         iv.setVisibility(View.VISIBLE);
                         LoadingCreator.stopLoading();
                     }
 
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        iv.setImageBitmap(loadedImage);
+                        iv.setImageDrawable(BitmapUtil.bitmapToDrawable(context,loadedImage));
                         iv.setVisibility(View.VISIBLE);
                         LoadingCreator.stopLoading();
                     }
 
                     @Override
                     public void onLoadingCancelled(String imageUri, View view) {
+                        iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
                         iv.setVisibility(View.VISIBLE);
                         LoadingCreator.stopLoading();
                     }

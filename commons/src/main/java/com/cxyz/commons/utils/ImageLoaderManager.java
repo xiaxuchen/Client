@@ -4,6 +4,7 @@ package com.cxyz.commons.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.cxyz.commons.R;
@@ -12,6 +13,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -114,6 +116,29 @@ public class ImageLoaderManager {
      */
     public void displayImage(ImageView imageView,String url, ImageLoadingListener listener){
         displayImage(imageView,url,null,listener);
+    }
+
+    public static class ImageLoadingListenerWrapper implements ImageLoadingListener{
+
+        @Override
+        public void onLoadingStarted(String imageUri, View view) {
+
+        }
+
+        @Override
+        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+        }
+
+        @Override
+        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+
+        }
+
+        @Override
+        public void onLoadingCancelled(String imageUri, View view) {
+
+        }
     }
 
 }

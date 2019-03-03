@@ -2,12 +2,14 @@ package com.cxyz.mains.holder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.cxyz.commons.utils.AppUtil;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.mains.R;
@@ -46,8 +48,10 @@ public class LocalImageHolder extends Holder<LocalImageHolder.Data> {
             btn_open.setVisibility(View.VISIBLE);
             btn_open.setOnClickListener(view -> {
                 SpUtil instance = SpUtil.getInstance();
-                instance.putBoolean("isFirst",false);
+                LogUtil.e(SpUtil.getInstance().getString("versionName","caonima"));
+                LogUtil.e("context:"+AppUtil.getVersionName(context));
                 instance.putString("versionName", AppUtil.getVersionName(context));
+                LogUtil.e(SpUtil.getInstance().getString("versionName","caonima"));
                 Class clazz = LoginActivity.class;
                 if(UserManager.getInstance().isLogined())
                     clazz = HomeActivity.class;

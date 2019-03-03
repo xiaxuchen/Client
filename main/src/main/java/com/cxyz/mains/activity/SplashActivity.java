@@ -17,6 +17,7 @@ import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mains.R;
 import com.cxyz.mains.ipresenter.ISplashPresenter;
@@ -31,6 +32,11 @@ import java.util.TimerTask;
 
 public class SplashActivity extends BaseActivity<ISplashPresenter> implements ISplashView {
 
+    private static final int STATE_LOGIN = 0;
+
+    private static final int STATE_FIRST_SHOW = 1;
+
+    private static final int STATE_HOME = 2;
 
     private Timer timer = new Timer();
 
@@ -41,6 +47,8 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     private TextView tv_timer;
 
     private boolean autoLogined = false;
+
+    private int state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +67,14 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
 
     @Override
     public void initData() {
+        if(!getSpUtil().getString("versionName","0").equals(AppUtil.getVersionName(getActivity())))
+            flag = true;
+        LogUtil.e(getSpUtil().getString("versionName","0"));
+        LogUtil.e(!getSpUtil().getString("versionName","0").equals(AppUtil.getVersionName(getActivity())));
+        if(flag)
+            state = STATE_FIRST_SHOW;
+        else
+            state = STATE_LOGIN;
     }
 
     @Override
@@ -66,7 +82,7 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
         tv_timer.setOnClickListener(view -> {
             if(!autoLogined)
             {
-                iPresenter.autoLogin();
+                afterLogin();
                 timer.cancel();
             }
         });
@@ -75,6 +91,7 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     @Override
     protected void afterInit() {
         super.afterInit();
+        iPresenter.autoLogin();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -82,18 +99,8 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
                     times++;
                     if(times == 3)
                     {
-                        autoLogined = true;
-                        timer.cancel();
-                        if(!SpUtil.getInstance().getBoolean("isFirst",true) && SpUtil.getInstance().getString("versionName","0").equals(AppUtil.getVersionName(getActivity())))
-                        {
-                            flag = true;
-                            startActivity(LoginActivity.class);
-                            iPresenter.autoLogin();
-                            finish();
-                            return;
-                        }
-                        else
-                            iPresenter.autoLogin();
+                        afterLogin();
+                        return;
                     }
                     tv_timer.setText(3-times+"s 跳过");
                 });
@@ -115,19 +122,37 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
 
     @Override
     public void autoLoginSuccess() {
-        LogUtil.e(System.currentTimeMillis()+"");
-        //如果不是是第一次打开就直接跳转至HomeActivity
-        if(!flag)
-        {
-            startActivity(HomeActivity.class);
-            finish();
-        }
+        if(flag)
+            state = STATE_FIRST_SHOW;
+        else
+            state = STATE_HOME;
     }
 
     @Override
     public void autoLoginFail(final String info) {
-        startActivity(FirstShowActivity.class);
-        finish();
+        if(flag)
+            state = STATE_FIRST_SHOW;
+        else
+            state = STATE_LOGIN;
     }
 
+    /**
+     * 登录之后（如果登录超时也会调用）
+     */
+    private void afterLogin()
+    {
+        autoLogined = true;
+        timer.cancel();
+        Class clazz = null;
+        switch (state)
+        {
+            case STATE_FIRST_SHOW:clazz = FirstShowActivity.class;break;
+            case STATE_LOGIN:clazz = LoginActivity.class;break;
+            case STATE_HOME:clazz = HomeActivity.class;break;
+        }
+        LogUtil.e(state);
+        Intent intent = new Intent(getActivity(),clazz);
+        startActivity(intent);
+        finish();
+    }
 }

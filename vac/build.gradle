@@ -64,3 +64,6 @@ dependencies {
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.annotationProcessor"
     compile project(':logiccommons')
 }
+repositories {
+    mavenCentral()
+}

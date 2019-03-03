@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.contrarywind.adapter.WheelAdapter;
 import com.contrarywind.view.WheelView;
 import com.cxyz.commons.R;
+import com.cxyz.commons.date.Date;
 import com.cxyz.commons.date.DateTime;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ScreenUtil;
@@ -61,11 +62,17 @@ public class DateTimeDialog extends Dialog {
 
     public static class DateBuilder{
 
+        private TextView tv_year;
+
         private Context mContext;
 
         private CalendarView calendarView;
 
         private DateTimeDialog mDialog;
+
+        private Integer year;
+
+        private Date date;
 
         private OnDateSelectListener listener;
 
@@ -86,16 +93,55 @@ public class DateTimeDialog extends Dialog {
         private void initView(View view)
         {
             calendarView = view.findViewById(R.id.calendarView);
+            tv_year = view.findViewById(R.id.tv_year);
+            if(date != null)
+            {
+                calendarView.scrollToCalendar(Integer.parseInt(date.getYear()),
+                        Integer.parseInt(date.getMonth()),Integer.parseInt(date.getDay()));
+            }
         }
 
         private void initListener()
         {
             calendarView.setOnDateSelectedListener((calendar, isClick) -> {
+                int curYear = calendar.getYear();
+                if(year == null || year != curYear)
+                {
+                    tv_year.setText(curYear+"");
+                    year = curYear;
+                }
                 if(listener != null && isClick)
                     listener.onDateSelect(mDialog,calendar.getYear(),calendar.getMonth(),calendar.getDay());
 
             });
 
+        }
+
+        /**
+         * 设置日期
+         * @param year
+         * @param month
+         * @param day
+         * @return
+         */
+        public DateTimeDialog.DateBuilder setDate(int year, int month, int day)
+        {
+            date = new Date();
+            date.setYear(year);
+            date.setMonth(month);
+            date.setDay(day);
+            return this;
+        }
+
+        /**
+         * 设置日期
+         * @param date 日期
+         * @return
+         */
+        public DateTimeDialog.DateBuilder setDate(Date date)
+        {
+            this.date = date;
+            return this;
         }
 
         /**

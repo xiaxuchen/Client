@@ -22,20 +22,19 @@ import java.util.Set;
 
 public class SpUtil {
 
-    private static final String FILENAME = "config";
+    private static final String FILE_NAME = "config";
 
     private SharedPreferences sp;
-
-    private SharedPreferences.Editor edit;
 
     private static SpUtil su;
 
     private static Context context;
 
+    private SharedPreferences.Editor editor;
+
     private SpUtil(Context context, String name, int mode)
     {
         sp = context.getSharedPreferences(name, mode);
-        edit = edit();
     }
 
     public static void init(Context context)
@@ -47,9 +46,26 @@ public class SpUtil {
         if(context==null)
             return null;
         if (su == null) {
-            su = new SpUtil(context, FILENAME, context.MODE_PRIVATE);
+            su = new SpUtil(context, FILE_NAME, context.MODE_PRIVATE);
         }
         return su;
+    }
+
+    /**
+     * 单例获取edit
+     * @return
+     */
+    private Editor edit()
+    {
+        if(editor == null)
+        {
+            synchronized (SpUtil.class)
+            {
+                if(editor == null)
+                    editor = sp.edit();
+            }
+        }
+        return editor;
     }
 
     public Map<String, ?> getAll() {
@@ -84,72 +100,60 @@ public class SpUtil {
         return sp.contains(key);
     }
 
-    public Editor edit() {
-        return sp.edit();
-    }
-
-    public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+    public SpUtil registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
         sp.registerOnSharedPreferenceChangeListener(listener);
+        return this;
     }
 
-    public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+    public SpUtil unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
         sp.unregisterOnSharedPreferenceChangeListener(listener);
+        return this;
     }
 
-    public Editor putString(String key, String value) {
-        edit.putString(key, value);
-        edit.commit();
-        return edit;
+    public SpUtil putString(String key, String value) {
+        edit().putString(key,value).commit();
+        return this;
     }
 
-    public Editor putStringSet(String key, Set<String> values) {
-        edit.putStringSet(key, values);
-        edit.commit();
-        return edit;
+    public SpUtil putStringSet(String key, Set<String> values) {
+        edit().putStringSet(key,values).commit();
+        return this;
     }
 
-    public Editor putInt(String key, int value) {
-        edit.putInt(key, value);
-        edit.commit();
-        return edit;
+    public SpUtil putInt(String key, int value) {
+        edit().putInt(key,value).commit();
+        return this;
     }
 
-    public Editor putLong(String key, long value) {
-        edit.putLong(key, value);
-        edit.commit();
-        return edit;
+    public SpUtil putLong(String key, long value) {
+        edit().putLong(key,value).commit();
+        return this;
     }
 
-    public Editor putFloat(String key, float value) {
-        edit.putFloat(key, value);
-        edit.commit();
-        return edit;
+    public SpUtil putFloat(String key, float value) {
+        edit().putFloat(key,value).commit();
+        return this;
     }
 
-    public Editor putBoolean(String key, boolean value) {
-        edit.putBoolean(key, value);
-        edit.commit();
-        return edit;
+    public SpUtil putBoolean(String key, boolean value) {
+        edit().putBoolean(key,value).commit();
+        return this;
     }
 
-    public Editor remove(String key) {
-        edit.remove(key);
-        edit.commit();
-        return edit;
+    public synchronized SpUtil remove(String key) {
+        synchronized (SpUtil.class)
+        {
+            edit().remove(key).commit();
+        }
+        return this;
     }
 
-    public Editor clear() {
-        edit.clear();
-        edit.commit();
-        return edit;
-    }
-
-    public boolean commit() {
-        return edit.commit();
-    }
-
-    public void apply() {
-        edit.apply();
+    public synchronized SpUtil clear() {
+        synchronized (SpUtil.class)
+        {
+            edit().clear().commit();
+        }
+        return this;
     }
 
 }

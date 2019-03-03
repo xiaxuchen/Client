@@ -82,7 +82,7 @@ public class MineVacateActivity extends BaseActivity<IMineVacatePresenter> imple
     @Override
     public void showVacates(List<VacateDto> vacateDtos) {
         if(adapter == null)
-            adapter = new VacateAdapter(getActivity(),vacateDtos,R.layout.item_vacate_layout);
+            adapter = new VacateAdapter(getActivity(),vacateDtos);
         lv_vacates.setAdapter(adapter);
     }
 

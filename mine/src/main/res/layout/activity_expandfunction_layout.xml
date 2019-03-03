@@ -51,7 +51,7 @@
                 android:layout_gravity="center"
                 android:background="@color/common_white"
                 android:src="@mipmap/newspaper" />-->
-            <com.cxyz.mine.activity.CircleImage
+            <com.cxyz.commons.widget.imageview.CircleImage
                 android:id="@+id/iv_expandfun_shcoolnews"
                 android:layout_width="75dp"
                 android:layout_height="65dp"
@@ -83,7 +83,7 @@
                 android:layout_gravity="center"
                 android:background="@color/common_white"
                 android:src="@mipmap/newspaper" />-->
-            <com.cxyz.mine.activity.CircleImage
+            <com.cxyz.commons.widget.imageview.CircleImage
                 android:id="@+id/iv_expandfun_notice"
                 android:layout_width="75dp"
                 android:layout_height="65dp"
@@ -106,14 +106,14 @@
             android:background="@drawable/linerlayout_shape"
             android:orientation="vertical">
 
-           <!-- <com.cxyz.mine.activity.CircleImage
+           <!--com.cxyz.commons.widget.imageview.CircleImagemage
                 android:id="@+id/iv_expandfun_classsight"
                 android:layout_width="75dp"
                 android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:background="@color/common_white"
                 android:src="@mipmap/newspaper" />-->
-            <com.cxyz.mine.activity.CircleImage
+            <com.cxyz.commons.widget.imageview.CircleImage
                 android:id="@+id/iv_expandfun_classsight"
                 android:layout_width="75dp"
                 android:layout_height="65dp"
@@ -151,7 +151,7 @@
                 android:layout_gravity="center"
                 android:background="@color/common_white"
                 android:src="@mipmap/newspaper" />-->
-            <com.cxyz.mine.activity.CircleImage
+            <com.cxyz.commons.widget.imageview.CircleImage
                 android:id="@+id/iv_expandfun_member"
                 android:layout_width="75dp"
                 android:layout_height="65dp"
@@ -182,7 +182,7 @@
                 android:layout_gravity="center"
                 android:background="@color/common_white"
                 android:src="@mipmap/newspaper" />-->
-            <com.cxyz.mine.activity.CircleImage
+            <com.cxyz.commons.widget.imageview.CircleImage
                 android:id="@+id/iv_expandfun_communication"
                 android:layout_width="75dp"
                 android:layout_height="65dp"
@@ -212,7 +212,7 @@
                 android:layout_gravity="center"
                 android:background="@color/common_white"
                 android:src="@mipmap/newspaper" />-->
-            <com.cxyz.mine.activity.CircleImage
+            <com.cxyz.commons.widget.imageview.CircleImage
                 android:id="@+id/iv_expandfun_classlist"
                 android:layout_width="75dp"
                 android:layout_height="65dp"
