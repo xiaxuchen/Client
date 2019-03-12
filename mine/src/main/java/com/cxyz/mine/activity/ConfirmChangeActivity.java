@@ -48,7 +48,7 @@ public class ConfirmChangeActivity extends BaseActivity {
                 getActivity().overridePendingTransition(R.anim.enter_next, R.anim.enter_exit);//动画过渡效果
             }
         });
-        final MyCountDownTimer myCountDownTimer = new MyCountDownTimer(10000,1000);
+
         bt_confirm_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,9 +57,11 @@ public class ConfirmChangeActivity extends BaseActivity {
                 getActivity().overridePendingTransition(R.anim.enter_next, R.anim.enter_exit);//动画过渡效果
             }
         });
+
         bt_confirm_getcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final MyCountDownTimer myCountDownTimer = new MyCountDownTimer(10000,1000);
                 myCountDownTimer.start();
             }
         });
@@ -70,7 +72,7 @@ public class ConfirmChangeActivity extends BaseActivity {
         return null;
     }
     //倒计时函数
-    private class MyCountDownTimer extends CountDownTimer {
+    public class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
