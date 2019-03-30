@@ -11,7 +11,7 @@
         tools:overrideLibrary="com.prolificinteractive.materialcalendarview"
         android:label="@string/common_app_name">
 
-        <activity android:name="com.cxyz.mains.activity.SplashActivity"
+       <activity android:name="com.cxyz.mains.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

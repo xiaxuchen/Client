@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    compile 'com.maksim88:PasswordEditText:v0.9'
     compile 'com.android.support.constraint:constraint-layout:1.1.3'
     compile 'com.github.lecho:hellocharts-android:v1.5.8'
     compile fileTree(include: ['*.jar'], dir: 'libs')

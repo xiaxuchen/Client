@@ -10,9 +10,8 @@
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/CheckTheme" >
-        <activity
+        <activity android:name="com.cxyz.mains.activity.HomeActivity">
             android:name="com.cxyz.mains.activity.HomeActivity">
-
         </activity>
         <activity android:name="com.cxyz.mains.activity.SplashActivity"
             android:theme="@style/SplashTheme">

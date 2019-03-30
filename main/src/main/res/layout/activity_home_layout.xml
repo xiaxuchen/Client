@@ -47,7 +47,7 @@
                         android:id="@+id/iv_check"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/app_statistic_off"/>
+                        android:src="@mipmap/statistic_off"/>
                     <TextView
                         android:textColor="@color/app_off"
                         android:id="@+id/tv_check"
@@ -75,7 +75,7 @@
                         android:id="@+id/iv_home"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/app_home_on"/>
+                        android:src="@mipmap/home_on"/>
                     <TextView
                         android:textColor="@color/app_off"
                         android:id="@+id/tv_home"
@@ -100,11 +100,12 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <ImageView
                         android:id="@+id/iv_mine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/app_mine_off"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/mine_off" />
                     <TextView
                         android:textColor="@color/app_off"
                         android:id="@+id/tv_mine"
