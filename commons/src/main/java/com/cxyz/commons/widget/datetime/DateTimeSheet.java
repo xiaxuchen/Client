@@ -31,8 +31,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import com.cxyz.commons.R;
-import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
-import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheetItemView;
 
 /**
  * Created by Administrator on 2019/2/9.
@@ -342,17 +340,17 @@ public class DateTimeSheet extends Dialog {
             tv_time.setOnClickListener(view -> {
                 showAndHide(false);
             });
-            calendarView.setOnDateSelectedListener( (calendar, isClick) -> {
-                if (isFirstSelect)
-                {
+            calendarView.setOnDateSelectedListener((calendar, isClick) -> {
+
+                if (isFirstSelect) {
                     isFirstSelect = false;
                     return;
                 }
-                if(isAnimating)
+                if (isAnimating)
                     return;
                 initDateView();
-                if(isClick)
-                showAndHide(false);
+                if (isClick)
+                    showAndHide(false);
             });
             wheelview_hour.setOnItemSelectedListener(index -> {
                 initTimeView();

@@ -8,7 +8,7 @@ android {
         signingconfigs {
             keyAlias '点到为止'
             keyPassword 'luohui123'
-            storeFile file('D:/untilchecked.jks')
+            storeFile file('E:/d/untilchecked.jks')
             storePassword 'luohui123'
         }
     }

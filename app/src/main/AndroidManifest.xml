@@ -11,13 +11,13 @@
         tools:overrideLibrary="com.prolificinteractive.materialcalendarview"
         android:label="@string/common_app_name">
 
-       <activity android:name="com.cxyz.mains.activity.SplashActivity"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+       <!--<activity android:name="com.cxyz.mains.activity.SplashActivity"-->
+            <!--android:theme="@style/SplashTheme">-->
+            <!--<intent-filter>-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
 
         <!--<activity android:name=".tinker.applicationlike.MainActivity">-->
             <!--<intent-filter>-->
