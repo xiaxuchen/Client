@@ -18,6 +18,8 @@
         <activity android:name=".activity.CheckHomepageActivity"></activity>
         <!--<activity android:name=".activity.AuditActivity"></activity>-->
         <activity android:name=".activity.ChangePwdACtivity"></activity>
+        <activity android:name=".activity.OtherSettingActivity"></activity>
+        <activity android:name=".activity.ConfirmChangeActivity"></activity>
 
     </application>
 

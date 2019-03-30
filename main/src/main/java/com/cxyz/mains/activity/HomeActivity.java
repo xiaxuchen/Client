@@ -158,9 +158,9 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         int id = ids[position];
         if(id == R.id.ll_check)
         {
-            iv_check.setImageResource(R.mipmap.app_statistic_on);
-            iv_mine.setImageResource(R.mipmap.app_mine_off);
-            iv_home.setImageResource(R.mipmap.app_home_off);
+            iv_check.setImageResource(R.mipmap.statistic_on);
+            iv_mine.setImageResource(R.mipmap.mine_off);
+            iv_home.setImageResource(R.mipmap.home_off);
             tv_check.setTextColor(getResources().getColor(R.color.app_on));
             tv_mine.setTextColor(getResources().getColor(R.color.app_off));
             tv_home.setTextColor(getResources().getColor(R.color.app_off));
@@ -168,9 +168,9 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         }
         else if(id == R.id.ll_mine)
         {
-            iv_check.setImageResource(R.mipmap.app_statistic_off);
-            iv_home.setImageResource(R.mipmap.app_home_off);
-            iv_mine.setImageResource(R.mipmap.app_mine_on);
+            iv_check.setImageResource(R.mipmap.statistic_off);
+            iv_home.setImageResource(R.mipmap.home_off);
+            iv_mine.setImageResource(R.mipmap.mine_on);
             tv_mine.setTextColor(getResources().getColor(R.color.app_on));
             tv_check.setTextColor(getResources().getColor(R.color.app_off));
             tv_home.setTextColor(getResources().getColor(R.color.app_off));
@@ -178,12 +178,12 @@ public class HomeActivity extends FragmentActivity implements View.OnClickListen
         }
         else if(id == R.id.ll_home)
         {
-            iv_check.setImageResource(R.mipmap.app_statistic_off);
-            iv_mine.setImageResource(R.mipmap.app_mine_off);
+            iv_check.setImageResource(R.mipmap.statistic_off);
+            iv_mine.setImageResource(R.mipmap.mine_off);
             tv_mine.setTextColor(getResources().getColor(R.color.app_off));
             tv_check.setTextColor(getResources().getColor(R.color.app_off));
             tv_home.setTextColor(getResources().getColor(R.color.app_on));
-            iv_home.setImageResource(R.mipmap.app_home_on);
+            iv_home.setImageResource(R.mipmap.home_on);
             tv_title.setTitle("主页");
         }
         if(ismove)

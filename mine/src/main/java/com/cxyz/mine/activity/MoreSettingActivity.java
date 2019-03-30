@@ -61,7 +61,10 @@ public class MoreSettingActivity extends BaseActivity {
         sw__udpate.setOnCheckedChangeListener((compoundButton, b) -> getSpUtil().putBoolean("update",b));
 
     }
+    public void ll_mine_update(){
 
+
+    }
     @Override
     protected IBasePresenter createIPresenter() {
         return null;
