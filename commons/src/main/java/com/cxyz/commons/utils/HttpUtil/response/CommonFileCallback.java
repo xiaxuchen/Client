@@ -7,6 +7,7 @@ import android.os.Message;
 import com.cxyz.commons.utils.HttpUtil.exception.OKHttpException;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
+import com.cxyz.commons.utils.LogUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,11 +30,13 @@ public class CommonFileCallback implements Callback {
     private Handler mDeliveryHandler;
     private DisposeDownLoadListener mListener;
     private String mFilePath;
+    private String content_disposition;
     private int mProgress;
 
     public CommonFileCallback(DisposeDataHandler handle) {
         this.mListener = (DisposeDownLoadListener) handle.listener;
         this.mFilePath = handle.mSource;
+        this.content_disposition = handle.content_disposition;
         this.mDeliveryHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
@@ -53,6 +56,15 @@ public class CommonFileCallback implements Callback {
 
     @Override
     public void onResponse(Call call, Response response) throws IOException {
+        if(content_disposition != null)
+        {
+            String header = response.header("content-disposition");
+            if(!content_disposition.equals(header))
+            {
+                mDeliveryHandler.post(() -> mListener.onFailure(response.body()));
+                return;
+            }
+        }
         final File file = handleResponse(response);
         mDeliveryHandler.post(() -> {
             if (file != null) {

@@ -123,7 +123,7 @@
         android:id="@+id/tv_reason_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="请假事由 {vac_down}"
+        android:text="请假事由 {vac-down}"
         android:textColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@+id/tv_len_hint"
         app:layout_constraintLeft_toLeftOf="@+id/tv_len_hint" />

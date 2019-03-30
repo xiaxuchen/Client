@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
@@ -65,7 +67,6 @@ public class UpdateDownloadRequest implements Runnable{
 
             }catch (Exception e){
                 throw e;
-
             }
         }
     }

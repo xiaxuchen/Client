@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/widget_date_time_dialog_background_shape"
+    >
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.contrarywind.view.WheelView
+            android:id="@+id/wheelview_hour"
+            android:layout_width="40dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="16dp"/>
+
+        <com.contrarywind.view.WheelView
+            android:id="@+id/wheelview_minute"
+            android:layout_width="40dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="16dp"/>
+
+        <com.contrarywind.view.WheelView
+            android:id="@+id/wheelview_second"
+            android:layout_width="40dp"
+            android:layout_height="120dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:textColor="@drawable/widget_time_btn_selector"
+            android:text="取消"
+            />
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:textColor="@drawable/widget_time_btn_selector"
+            android:text="确定"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

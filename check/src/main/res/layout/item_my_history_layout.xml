@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:background="@drawable/check_block"
-    >
+    android:paddingBottom="8dp">
 
     <TextView
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:id="@+id/tv_task_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#5e5e5e"
-        android:textSize="20sp"
+        android:textColor="@color/qmui_config_color_black"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         />
 
     <TextView
+        android:layout_marginTop="8dp"
         android:id="@+id/tv_des"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@+id/tv_task_name"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="#aeaeae"
         android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_task_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_result"
         />
 
     <TextView
         android:id="@+id/tv_date"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="#aeaeae"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_des"
         />
 
     <TextView
         android:id="@+id/tv_result"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@color/common_fourth_brown"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

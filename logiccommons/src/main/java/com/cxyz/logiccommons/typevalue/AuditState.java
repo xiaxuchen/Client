@@ -16,4 +16,9 @@ public interface AuditState {
      * 审核失败
      */
     int FAIL = -1;
+
+    /**
+     * 只是请假条不是请假(条件是没有请假审核)
+     */
+    int ONLY_VACATE = 2;
 }

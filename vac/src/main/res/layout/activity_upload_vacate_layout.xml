@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/logic_background"
+    tools:context="com.cxyz.vac.activity.VacateActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.cxyz.commons.widget.TitleView
+            android:id="@+id/tv_title"
+            android:background="@drawable/common_title_shadow_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="上传假条"
+            />
+
+        <RelativeLayout
+            android:background="@color/app_white"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请假类型"
+                android:textSize="14sp"
+                android:textColor="@color/common_black"
+                />
+
+            <TextView
+                android:layout_toLeftOf="@+id/tv_type_icon"
+                android:id="@+id/tv_vac_type"
+                android:layout_marginRight="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"
+                android:textColor="@color/common_line"
+                android:textSize="14sp"
+                />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:id="@+id/tv_type_icon"
+                android:textColor="@color/common_line"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{vac-next}"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_time_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rg_time"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/rb_time_len"
+                    android:checked="true"
+                    android:background="@drawable/upload_vacate_time_background_selector"
+                    android:padding="8dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="时间段"/>
+
+                <RadioButton
+                    android:id="@+id/rb_week"
+                    android:background="@drawable/upload_vacate_time_background_selector"
+                    android:padding="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="每周"/>
+            </RadioGroup>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:background="@color/app_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开始日期"
+                        android:textSize="14sp"
+                        android:textColor="@drawable/vac_item_background"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_vac_start_date"
+                        android:layout_toLeftOf="@+id/tv_start_date_icon"
+                        android:layout_marginRight="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="请选择"
+                        android:textSize="14sp"
+                        android:textColor="@color/common_line"/>
+
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="8dp"
+                        android:id="@+id/tv_start_date_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/common_line"
+                        android:text="{vac-next}"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/common_line"/>
+
+                <RelativeLayout
+                    android:background="@color/app_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="结束日期"
+                        android:textColor="@drawable/vac_item_background"
+                        android:textSize="14sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_vac_end_date"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/tv_end_date_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="请选择"
+                        android:textColor="@color/common_line"
+                        android:textSize="14sp"/>
+
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="8dp"
+                        android:id="@+id/tv_end_date_icon"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/common_line"
+                        android:text="{vac-next}"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/common_line"/>
+
+                <LinearLayout
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_white">
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="开始时间"
+                            />
+                        <TextView
+                            android:layout_marginLeft="8dp"
+                            android:id="@+id/tv_vac_start_time"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/tv_vac_start_time_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="请选择"
+                            android:textColor="@color/common_line"
+                            android:textSize="14sp"/>
+
+                        <com.joanzapata.iconify.widget.IconTextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="8dp"
+                            android:id="@+id/tv_vac_start_time_icon"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/common_line"
+                            android:text="{vac-next}"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="结束时间"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="8dp"
+                            android:id="@+id/tv_vac_end_time"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/tv_vac_end_time_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="请选择"
+                            android:textColor="@color/common_line"
+                            android:textSize="14sp"/>
+
+                        <com.joanzapata.iconify.widget.IconTextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="8dp"
+                            android:id="@+id/tv_vac_end_time_icon"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/common_line"
+                            android:text="{vac-next}"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/common_line"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_white"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="8dp"
+                    android:textSize="16sp"
+                    android:text="星期"/>
+
+                <LinearLayout
+                    android:background="@color/app_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/cb_monday"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="周一"
+                        android:textColor="@drawable/upload_vacate_week_color_selector"
+                        android:background="@drawable/upload_vacate_week_background_selector"
+                        android:padding="8dp"
+                        android:layout_height="match_parent" />
+                    <CheckBox
+                        android:id="@+id/cb_tuesday"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="周二"
+                        android:textColor="@drawable/upload_vacate_week_color_selector"
+                        android:background="@drawable/upload_vacate_week_background_selector"
+                        android:padding="8dp"
+                        android:layout_height="match_parent" />
+                    <CheckBox
+                        android:id="@+id/cb_wednesday"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="周三"
+                        android:textColor="@drawable/upload_vacate_week_color_selector"
+                        android:background="@drawable/upload_vacate_week_background_selector"
+                        android:padding="8dp"
+                        android:layout_height="match_parent" />
+                    <CheckBox
+                        android:id="@+id/cb_thursday"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:button="@null"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:text="周四"
+                        android:textColor="@drawable/upload_vacate_week_color_selector"
+                        android:background="@drawable/upload_vacate_week_background_selector"
+                        android:padding="8dp"
+                        android:layout_height="match_parent" />
+                    <CheckBox
+                        android:id="@+id/cb_friday"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:button="@null"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:text="周五"
+                        android:textColor="@drawable/upload_vacate_week_color_selector"
+                        android:background="@drawable/upload_vacate_week_background_selector"
+                        android:padding="8dp"
+                        android:layout_height="match_parent" />
+                    <CheckBox
+                        android:id="@+id/cb_saturday"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:button="@null"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:text="周六"
+                        android:textColor="@drawable/upload_vacate_week_color_selector"
+                        android:background="@drawable/upload_vacate_week_background_selector"
+                        android:padding="8dp"
+                        android:layout_height="match_parent" />
+                    <CheckBox
+                        android:id="@+id/cb_sunday"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:button="@null"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:text="周日"
+                        android:textColor="@drawable/upload_vacate_week_color_selector"
+                        android:background="@drawable/upload_vacate_week_background_selector"
+                        android:padding="8dp"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/ll_info"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+
+               <RelativeLayout
+                   android:background="@color/app_white"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:paddingTop="8dp"
+                   android:paddingBottom="8dp">
+
+                   <TextView
+                       android:layout_marginLeft="8dp"
+                       android:layout_alignParentLeft="true"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="开始时间"
+                       android:textSize="14sp"
+                       android:textColor="@drawable/vac_item_background"
+                       />
+
+                   <TextView
+                       android:id="@+id/tv_vac_start"
+                       android:layout_toLeftOf="@+id/tv_start_icon"
+                       android:layout_marginRight="8dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="请选择"
+                       android:textSize="14sp"
+                       android:textColor="@color/common_line"/>
+
+                   <com.joanzapata.iconify.widget.IconTextView
+                       android:layout_centerVertical="true"
+                       android:layout_marginRight="8dp"
+                       android:id="@+id/tv_start_icon"
+                       android:layout_alignParentRight="true"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/common_line"
+                       android:text="{vac-next}"/>
+               </RelativeLayout>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="0.5dp"
+                   android:background="@color/common_line"/>
+
+               <RelativeLayout
+                   android:background="@color/app_white"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:paddingTop="8dp"
+                   android:paddingBottom="8dp">
+
+                   <TextView
+                       android:layout_marginLeft="8dp"
+                       android:layout_alignParentLeft="true"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="结束时间"
+                       android:textColor="@drawable/vac_item_background"
+                       android:textSize="14sp"
+                       />
+
+                   <TextView
+                       android:id="@+id/tv_vac_end"
+                       android:layout_marginRight="8dp"
+                       android:layout_toLeftOf="@+id/tv_end_icon"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="请选择"
+                       android:textColor="@color/common_line"
+                       android:textSize="14sp"/>
+
+                   <com.joanzapata.iconify.widget.IconTextView
+                       android:layout_centerVertical="true"
+                       android:layout_marginRight="8dp"
+                       android:id="@+id/tv_end_icon"
+                       android:layout_alignParentRight="true"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/common_line"
+                       android:text="{vac-next}"/>
+               </RelativeLayout>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="0.5dp"
+                   android:background="@color/common_line"/>
+
+           </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:background="@color/app_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请假事由(选填)"
+                android:textSize="16sp"
+                android:textColor="@color/common_black"/>
+
+            <EditText
+                android:id="@+id/et_des"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/app_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="4"
+                android:textColor="@color/common_black"
+                android:textSize="16sp"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:hint="请输入请假原因"
+                android:textColorHint="@color/common_line"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:background="@color/common_white"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="图片"/>
+
+            <GridView
+                android:id="@+id/gv_imgs"
+                android:numColumns="4"
+                android:gravity="center"
+                android:layout_marginLeft="16dp"
+                android:stretchMode="none"
+                android:columnWidth="48dp"
+                android:verticalSpacing="16dp"
+                android:horizontalSpacing="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="提交"
+        android:textSize="14sp"
+        android:background="@drawable/vac_btn_background"
+        android:textColor="@color/app_white"
+        />
+
+</RelativeLayout>

@@ -34,7 +34,7 @@ public class ExportActivity extends BaseActivity<IExportPresenter> implements IE
     private int bDay,fDay;
     private int bYear,fYear;
 
-    private Spinner sp_class_name,sp_task_name;
+    private Spinner sp_class_names,sp_lesson_names;
 
     private List<GradeTaskDto> data;
 
@@ -45,19 +45,15 @@ public class ExportActivity extends BaseActivity<IExportPresenter> implements IE
     @Override
     public int getContentViewId() {
         Iconify.with(new IconfontModule());
-        return R.layout.activity_eximport_layout;
+        return R.layout.activity_export_layout;
     }
 
     @Override
     public void initView() {
-        tv_port_setfinshtime = findViewById(R.id.tv_port_setfinshtime);
-        tv_port_setbegintime = findViewById(R.id.tv_port_setbegintime);
         tv_title = findViewById(R.id.tv_title);
-        sp_class_name = findViewById(R.id.sp_class_name);
-        sp_task_name = findViewById(R.id.sp_task_name);
-
+        sp_class_names = findViewById(R.id.sp_class_names);
+        sp_lesson_names  = findViewById(R.id.sp_lesson_names);
         btn_download = findViewById(R.id.btn_download);
-
     }
 
     @Override
@@ -81,16 +77,13 @@ public class ExportActivity extends BaseActivity<IExportPresenter> implements IE
     @Override
     public void setEvent() {
         tv_title.setBackClickListener(v -> onBackPressed());
-        tv_port_setfinshtime.setOnClickListener(tvfinshtimeListner);
-        tv_port_setbegintime.setOnClickListener(tvbegintimeListner);
-
         btn_download.setOnClickListener(view -> {
 
             if(data != null)
             {
                 GradeTaskDto dto = data.get(classIndex);
                 LogUtil.d(dto);
-                iPresenter.getStatisticExcel(dto.getGradeId(),dto.getTasks().get(taskIndex).getName());
+                iPresenter.getStatisticExcel(dto.getTasks().get(taskIndex).getId());
             }
         });
     }
@@ -194,14 +187,14 @@ public class ExportActivity extends BaseActivity<IExportPresenter> implements IE
 
             classIndex = 0;
 
-            initSpTask(0);
+            initSpLesson(0);
 
-            sp_class_name.setAdapter(new ArrayAdapter<>(getActivity(),
+            sp_class_names.setAdapter(new ArrayAdapter<>(getActivity(),
                     android.R.layout.simple_spinner_item, arr));
-            sp_class_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            sp_class_names.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    initSpTask(i);
+                    initSpLesson(i);
                     classIndex = i;
                 }
 
@@ -213,23 +206,23 @@ public class ExportActivity extends BaseActivity<IExportPresenter> implements IE
         }
     }
 
-    private void initSpTask(int index)
+    private void initSpLesson(int index)
     {
         if(data.size()<=index)
             return;
         List<GTaskDto> taskDtos = data.get(index).getTasks();
-        String[] tasks = new String[taskDtos.size()];
+        String[] lessons = new String[taskDtos.size()];
         int i=0;
         for(GTaskDto dto:taskDtos)
         {
-            tasks[i]=dto.getName();
+            lessons[i]=dto.getName();
             i++;
         }
 
-        sp_task_name.setAdapter(new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_spinner_item, tasks));
+        sp_lesson_names.setAdapter(new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, lessons));
         taskIndex = 0;
-        sp_task_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        sp_lesson_names.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 taskIndex = i;

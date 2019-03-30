@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:state_pressed="false">
+    <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <padding
-                android:top="0dp"></padding>
-            <!-- 圆角深红色按钮 -->
             <solid android:color="#1296db"/>
 
             <corners android:radius="5dip"></corners>
@@ -14,17 +11,14 @@
         </shape>
     </item>
 
-    <item android:state_pressed="true">
+    <item android:state_pressed="false">
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <padding
-                android:top="0dp"></padding>
             <!-- 圆角红色按钮 -->
-            <solid android:color="#1874CD"/>
+            <solid android:color="@color/common_primary_color"/>
 
             <corners android:radius="5dip"/>
             <!--设置边框线的宽度和颜色-->
-            <stroke android:width="10dp" android:color="#1874CD" />
         </shape>
     </item>
 

@@ -80,6 +80,8 @@ dependencies {
     compile("com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.1.8")
     //tinker的核心库
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support.constraint:constraint-layout:1.1.3'
+
 }
 
 

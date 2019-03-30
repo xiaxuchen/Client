@@ -47,7 +47,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return mItemLayoutId[0];
+        return 0;
     }
 
     /**
@@ -165,7 +165,7 @@ public abstract class AdapterBase<T> extends BaseAdapter {
     }
 
     private ViewHolder getViewHolder(int position, View convertView, ViewGroup parent) {
-        return ViewHolder.get(mContext, convertView, parent, getItemViewType(position), position);
+        return ViewHolder.get(mContext, convertView, parent, mItemLayoutId[getItemViewType(position)], position);
     }
 
     public void convertView(ViewHolder holder, T item){};
@@ -192,6 +192,11 @@ public abstract class AdapterBase<T> extends BaseAdapter {
             intent.putExtras(bundle);
         }
         mContext.startActivity(intent);
+    }
+
+    public Context getContext()
+    {
+        return mContext;
     }
 }
 

@@ -2,18 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/common_primary_color"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:padding="8dp">
+        >
 
         <TextView
             android:id="@+id/title_back"
-            android:layout_width="110dp"
+            android:paddingLeft="8dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
@@ -22,7 +24,7 @@
             android:gravity="center_vertical"
             android:minWidth="45dp"
             android:singleLine="true"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/common_white"
             android:visibility="visible" />
 
@@ -36,7 +38,7 @@
             android:gravity="center"
             android:text="点到为止"
             android:textColor="@color/common_white"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/title_more"
@@ -47,7 +49,7 @@
             android:minWidth="50dp"
             android:paddingRight="10dp"
             android:textColor="@color/common_white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
 
 

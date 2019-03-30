@@ -1,4 +1,4 @@
-package com.cxyz.mains.adapter;
+package com.cxyz.logiccommons.adapter;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

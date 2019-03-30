@@ -72,10 +72,19 @@ public class CommonRequest {
             {
                 if(entry.getValue() instanceof File)
                 {
-                    builder.addFormDataPart("file", ((File) entry.getValue()).getName(), RequestBody.create(FILE_TYPE, (File) entry.getValue()));
-                }else{
+                    builder.addFormDataPart(entry.getKey(), ((File) entry.getValue()).getName(), RequestBody.create(FILE_TYPE, (File) entry.getValue()));
+                }else if (entry.getValue() instanceof File[])
+                {
+                    for(File f:(File[])entry.getValue())
+                        builder.addFormDataPart(entry.getKey(), f.getName(), RequestBody.create(FILE_TYPE,f));
+                }
+                else{
                     builder.addFormDataPart(entry.getKey(),String.valueOf(entry.getValue()));
                 }
+            }
+            for(Map.Entry<String,String> entry:params.urlParams.entrySet())
+            {
+                builder.addFormDataPart(entry.getKey(),String.valueOf(entry.getValue()));
             }
         }
 

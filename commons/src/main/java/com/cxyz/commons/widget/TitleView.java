@@ -6,12 +6,18 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cxyz.commons.R;
+import com.cxyz.commons.activity.BaseActivity;
+import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.commons.utils.statebar.StateBarHelper;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 
 /**
@@ -42,6 +48,8 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     //返回的icon，更多的icon
     private int backRes = R.mipmap.common_title_back,moreRes = 0;
 
+    private int background = R.drawable.view_title_shadow_layer;
+
     //相应的颜色
     private int backColor,moreColor,titleColor;
 
@@ -51,14 +59,17 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
 
     private OnMoreClickListener moreClickListener;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public TitleView(Context context) {
         this(context,null);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public TitleView(Context context, AttributeSet attrs) {
         this(context, attrs,0);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public TitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttr(context.obtainStyledAttributes(attrs,R.styleable.TitleView));
@@ -74,16 +85,28 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         txt_back = array.getString(R.styleable.TitleView_backText);
         backRes = array.getResourceId(R.styleable.TitleView_backIcon,backRes);
         moreRes = array.getResourceId(R.styleable.TitleView_moreIcon,moreRes);
+        background = array.getResourceId(R.styleable.TitleView_background,background);
         array.recycle();
     }
 
     /**
      * 初始化view
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void initView()
     {
+        final StateBarHelper stateBarHelper = StateBarHelper.getInstance();
         setOrientation(LinearLayout.VERTICAL);
-        View.inflate(getContext(), R.layout.views_title_layout, this);
+        View v = View.inflate(getContext(), R.layout.views_title_layout, this);
+
+        //如果支持沉浸式，则给TitleView添加上padding
+        if(stateBarHelper.translucentSupport())
+        {
+            LogUtil.d(v.getPaddingTop());
+            v.setPadding(v.getPaddingLeft(),v.getPaddingTop()+stateBarHelper.getStateBarHeight(getContext()),v.getPaddingRight(),v.getPaddingBottom());
+            LogUtil.d(v.getPaddingTop());
+        }
+        v.setBackgroundResource(background);
         back = findViewById(R.id.title_back);
         title = findViewById(R.id.title_title);
         more = findViewById(R.id.title_more);

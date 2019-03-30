@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_white">
+
+    <com.cxyz.commons.widget.TitleView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/homepage_export_title" />
+
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/kbv_scenery"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@mipmap/pxxyc"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/itv_check_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:text="{icon-people}"
+        android:textColor="@color/game1_blue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_class_names"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/v_line_check_class_right"
+        app:layout_constraintTop_toTopOf="@+id/sp_class_names" />
+
+    <View
+        android:id="@+id/v_line_check_class_right"
+        android:layout_width="0.5dp"
+        android:layout_height="0dp"
+        android:background="@color/material_grey_300"
+        app:layout_constraintBottom_toBottomOf="@+id/itv_check_class"
+        app:layout_constraintLeft_toRightOf="@+id/itv_check_class"
+        app:layout_constraintRight_toLeftOf="@+id/tv_check_class"
+        app:layout_constraintTop_toTopOf="@id/itv_check_class" />
+
+    <TextView
+        android:id="@+id/tv_check_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="@string/homepage_export_tv_check_class"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_class_names"
+        app:layout_constraintLeft_toRightOf="@+id/v_line_check_class_right"
+        app:layout_constraintRight_toLeftOf="@+id/sp_class_names"
+        app:layout_constraintTop_toTopOf="@+id/sp_class_names" />
+
+    <Spinner
+        android:id="@+id/sp_class_names"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="64dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintLeft_toRightOf="@+id/tv_check_class"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kbv_scenery" />
+
+    <View
+        android:id="@+id/v_line_class_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/material_grey_300"
+        app:layout_constraintLeft_toLeftOf="@+id/itv_check_class"
+        app:layout_constraintRight_toRightOf="@+id/sp_class_names"
+        app:layout_constraintTop_toBottomOf="@+id/sp_class_names" />
+
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/itv_check_lesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="{icon-coin}"
+        android:textColor="@color/game1_blue"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_lesson_names"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sp_lesson_names" />
+
+    <View
+        android:id="@+id/v_line_check_lesson_right"
+        android:layout_width="0.5dp"
+        android:layout_height="0dp"
+        android:background="@color/material_grey_300"
+        app:layout_constraintBottom_toBottomOf="@+id/itv_check_lesson"
+        app:layout_constraintEnd_toEndOf="@+id/v_line_check_class_right"
+        app:layout_constraintLeft_toLeftOf="@+id/v_line_check_class_right"
+        app:layout_constraintTop_toTopOf="@id/itv_check_lesson" />
+
+    <TextView
+        android:id="@+id/tv_check_lesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="@string/homepage_export_tv_check_lesson"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_lesson_names"
+        app:layout_constraintLeft_toRightOf="@+id/v_line_check_lesson_right"
+        app:layout_constraintRight_toLeftOf="@+id/sp_lesson_names"
+        app:layout_constraintTop_toTopOf="@+id/sp_lesson_names" />
+
+    <Spinner
+        android:id="@+id/sp_lesson_names"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="@id/sp_class_names"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_class_names" />
+
+    <View
+        android:id="@+id/v_line_lesson_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/material_grey_300"
+        app:layout_constraintLeft_toLeftOf="@+id/itv_check_lesson"
+        app:layout_constraintRight_toRightOf="@+id/sp_lesson_names"
+        app:layout_constraintTop_toBottomOf="@+id/sp_lesson_names" />
+
+    <Button
+        android:id="@+id/btn_download"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_selector"
+        android:text="@string/homepage_export_btn_download"
+        android:textColor="@color/common_white"
+        app:layout_constraintLeft_toLeftOf="@+id/itv_check_lesson"
+        app:layout_constraintRight_toRightOf="@+id/sp_lesson_names"
+        app:layout_constraintTop_toBottomOf="@+id/v_line_lesson_bottom" />
+
+</android.support.constraint.ConstraintLayout>

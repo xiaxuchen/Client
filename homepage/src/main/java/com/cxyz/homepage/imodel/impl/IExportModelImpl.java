@@ -3,6 +3,7 @@ package com.cxyz.homepage.imodel.impl;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
 import com.cxyz.homepage.constant.RequestCenter;
+import com.cxyz.homepage.dto.GradeLessonDto;
 import com.cxyz.homepage.dto.GradeTaskDto;
 import com.cxyz.homepage.imodel.IExportModel;
 import com.cxyz.logiccommons.domain.CheckResult;
@@ -20,7 +21,7 @@ public class IExportModelImpl extends IExportModel {
     @Override
     public void getGradeTasks(ModelListener<List<GradeTaskDto>,String> listener) {
         User user = UserManager.getInstance().getUser();
-        addCall(RequestCenter.getGradeTasks(user.getId(), user.getType(), new DisposeDataListener() {
+        addCall(RequestCenter.getGradeLessons(user.getId(), user.getType(), new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 CheckResult<List<GradeTaskDto>> cr = (CheckResult<List<GradeTaskDto>>) responseObj;
@@ -43,9 +44,10 @@ public class IExportModelImpl extends IExportModel {
     }
 
     @Override
-    public void getStatisticExcel(Integer gradeId, String taskName,getExcelListener listener) {
+    public void getStatisticExcel(Integer lessonId,getExcelListener listener)
+    {
         User user = UserManager.getInstance().getUser();
-        addCall(RequestCenter.getStatisticExcel(user.getId(), user.getType(), gradeId, taskName, new DisposeDownLoadListener() {
+        addCall(RequestCenter.getStatisticExcel(user.getId(), user.getType(),lessonId, new DisposeDownLoadListener() {
             @Override
             public void onProgress(int progrss) {
                 listener.onProgress(progrss);

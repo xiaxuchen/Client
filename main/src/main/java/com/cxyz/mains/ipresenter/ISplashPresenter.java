@@ -10,11 +10,6 @@ import com.cxyz.mains.iview.ISplashView;
 
 public abstract class ISplashPresenter extends IBasePresenter<ISplashModel,ISplashView> {
     /**
-     * 更新app
-     */
-    public abstract void Update();
-
-    /**
      * 自动登录
      * 如果sp中保存有用户名和密码则自动登录
      */

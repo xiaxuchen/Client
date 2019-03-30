@@ -1,12 +1,18 @@
 package com.cxyz.logiccommons.domain;
 
+
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
  * 请假表
  */
 public class Vacate {
+
+    public static final int TIME_LEN = 1;
+
+    public static final int WEEK = 2;
 
     private Integer id;//请假id
 
@@ -25,6 +31,12 @@ public class Vacate {
     private Timestamp sponsorTime;//发起时间
 
     private List<Audit> audits;//审核信息
+
+    private Integer timeType;//时间的记录类型,0为时间段,1为周次
+
+    private List<Date> dates;//当时间记录类型为1时，日期的list
+
+    private List<Photo> photos;//请假条照片
 
     public Vacate(){}
 
@@ -88,6 +100,7 @@ public class Vacate {
         this.type = type;
     }
 
+
     public Timestamp getSponsorTime() {
         return sponsorTime;
     }
@@ -104,6 +117,30 @@ public class Vacate {
         this.audits = audits;
     }
 
+    public Integer getTimeType() {
+        return timeType;
+    }
+
+    public void setTimeType(Integer timeType) {
+        this.timeType = timeType;
+    }
+
+    public List<Date> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<Date> dates) {
+        this.dates = dates;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
     @Override
     public String toString() {
         return "Vacate{" +
@@ -116,6 +153,9 @@ public class Vacate {
                 ", type=" + type +
                 ", sponsorTime=" + sponsorTime +
                 ", audits=" + audits +
+                ", timeType=" + timeType +
+                ", dates=" + dates +
+                ", photos=" + photos +
                 '}';
     }
 }

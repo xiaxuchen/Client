@@ -10,7 +10,10 @@ import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDownLoadListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.homepage.dto.CheckHistoryDto;
+import com.cxyz.homepage.dto.GradeLessonDto;
 import com.cxyz.homepage.dto.GradeTaskDto;
+import com.cxyz.logiccommons.constant.Constant;
 import com.cxyz.logiccommons.domain.CheckResult;
 import com.google.gson.reflect.TypeToken;
 
@@ -152,7 +155,7 @@ public class RequestCenter {
      * @param listener
      * @return
      */
-    public static Call getGradeTasks(String sponsorId,Integer sponsorType,DisposeDataListener listener)
+    public static Call getGradeLessons(String sponsorId,Integer sponsorType,DisposeDataListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("sponsorId",sponsorId);
@@ -160,8 +163,8 @@ public class RequestCenter {
 
         RequestParams params = new RequestParams(map);
         try {
-            return CommonOkHttpClient.get(NetWorkHomeUrl.GET_GRADE_TASKS,params,new DisposeDataHandler(listener,
-                    new TypeToken<CheckResult<List<GradeTaskDto>>>(){}.getType()));
+            return CommonOkHttpClient.get(NetWorkHomeUrl.GET_GRADE_LESSONS,params,new DisposeDataHandler(listener,
+                    new TypeToken<CheckResult<List<GradeLessonDto>>>(){}.getType()));
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
@@ -171,21 +174,19 @@ public class RequestCenter {
 
     /**
      * 获取统计的excel
-     * @param sponsorId
-     * @param sponsorType
-     * @param gradeId
-     * @param taskName
+     * @param sponsorId 发起人id
+     * @param sponsorType 发起人类型
+     * @param lessonId 课程id
      * @param listener
      * @return
      */
     public static Call getStatisticExcel(String sponsorId,Integer sponsorType,
-                                         Integer gradeId,String taskName,DisposeDownLoadListener listener)
+                                         Integer lessonId,DisposeDownLoadListener listener)
     {
         Map<String,String> map = new HashMap<>();
         map.put("sponsorId",sponsorId);
         map.put("sponsorType",sponsorType+"");
-        map.put("gradeId",gradeId+"");
-        map.put("taskName",taskName);
+        map.put("lessonId",lessonId+"");
 
         RequestParams params = new RequestParams(map);
         try {
@@ -196,4 +197,40 @@ public class RequestCenter {
         }
         return null;
     }
+
+    /**
+     * 获取课程考勤历史
+     * @param id 课程id
+     * @param start 起始位置
+     * @param listener
+     * @return
+     */
+    public static Call getLessonHistories(Integer id,Integer start,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("id",id+"");
+        if(start != null)
+            map.put("start",start+"");
+        try {
+            return CommonOkHttpClient.get(NetWorkHomeUrl.GET_LESSON_HISTORIES,new RequestParams(map),new DisposeDataHandler(listener,new TypeToken<CheckResult<List<CheckHistoryDto>>>(){}.getType()));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+    public static Call updateLessonNum(Integer id,String num,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("id",id+"");
+        map.put("num",num);
+        try {
+            return CommonOkHttpClient.post(NetWorkHomeUrl.UPDATE_LESSON_NUM,new RequestParams(map),new DisposeDataHandler(listener,new TypeToken<CheckResult<String>>(){}.getType()));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

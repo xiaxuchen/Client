@@ -341,11 +341,6 @@ public class AlterCheckActivity extends BaseActivity<IAlterPresenter> implements
         return 2;
     }
 
-    @Override
-    protected boolean isStateBar() {
-        return false;
-    }
-
     /**
      * 传入一个数组和值，获取值所在的index
      * @param array 数组

@@ -27,4 +27,30 @@ public interface NetWorkConstant {
      * 获取请假信息
      */
     String GET_VACATES = Constant.ROOT_URL+"/vacate/getVacates";
+
+    /**
+     * 上传请假条
+     */
+    String UPLOAD_VACATE = Constant.ROOT_URL+"/vacate/uploadVacate";
+
+    /**
+     * 获取假条的请求
+     *
+     */
+    String VAC_PHOTO = Constant.ROOT_URL+"/resource/vac/photo/";
+
+    /**
+     * 删除图片
+     */
+    String DELETE_PHOTO = Constant.ROOT_URL+"/vacate/deletePhoto";
+
+    /**
+     * 上传图片
+     */
+    String UPLOAD_PHOTO = Constant.ROOT_URL+"/vacate/uploadPhoto";
+
+    /**
+     * 获取一定时间的请假信息（主要是请假条图片）
+     */
+    String GET_VACATE_IN_DATES = Constant.ROOT_URL+"/vacate/getVacateInDates";
 }

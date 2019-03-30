@@ -14,6 +14,7 @@ import com.cxyz.commons.manager.ActivityStackManager;
 import com.cxyz.commons.manager.ScreenManager;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import org.greenrobot.eventbus.EventBus;
@@ -63,6 +64,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ContextManager.getRefWatcher().watch(this);
         if(eventBusEnable())
             EventBus.getDefault().register(this);
         LogUtil.i_withoutPre(getActivity().getClass().getSimpleName()+"--onCreate");
@@ -117,7 +119,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
         if(!isShowTitle()){
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
-        //screenManager.setStatusBar(isStateBar(), this,statusColor());
+        screenManager.setStatusBar(isStateBar(), this,statusColor());
         screenManager.setScreenRotate(isScreenRotate(), this);
         screenManager.setFullScreen(isFullScreen(), this);
     }
@@ -298,10 +300,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
      */
     @Override
     protected void onDestroy() {
-        //注册LeakCanary
-        RefWatcher refWatcher = ContextManager.getRefWatcher();
         //注销EventBus
-        refWatcher.watch(this);
         if(eventBusEnable())
             EventBus.getDefault().unregister(this);
         super.onDestroy();
@@ -341,7 +340,7 @@ public abstract class BaseActivity<p extends IBasePresenter> extends Activity im
 
     protected IBaseView getIView()
     {
-        return new IDefaultView(getActivity(),"正在加载中...",false);
+        return new IDefaultView(getActivity());
     }
 
     @Override

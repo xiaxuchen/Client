@@ -1,6 +1,7 @@
 package com.cxyz.homepage.imodel;
 
 import com.cxyz.commons.IModel.IBaseModel;
+import com.cxyz.homepage.dto.GradeLessonDto;
 import com.cxyz.homepage.dto.GradeTaskDto;
 
 import java.io.File;
@@ -21,11 +22,10 @@ public abstract class IExportModel extends IBaseModel {
 
     /**
      * 获取统计Excel
-     * @param gradeId 班级id
-     * @param taskName 课程名
+     * @param lessonId 课程id
      * @param listener
      */
-    public abstract void getStatisticExcel(Integer gradeId, String taskName,getExcelListener listener);
+    public abstract void getStatisticExcel(Integer lessonId,getExcelListener listener);
 
 
     public interface getExcelListener{

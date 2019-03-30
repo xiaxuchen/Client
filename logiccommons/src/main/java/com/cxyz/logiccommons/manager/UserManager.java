@@ -1,13 +1,15 @@
 package com.cxyz.logiccommons.manager;
 
 
+import android.content.Intent;
+
 import com.cxyz.commons.context.ContextManager;
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.logiccommons.domain.User;
+import com.cxyz.logiccommons.service.PushService;
 import com.cxyz.logiccommons.typevalue.PowerType;
 import com.cxyz.logiccommons.typevalue.UserType;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by 夏旭晨 on 2018/10/5.
@@ -15,7 +17,8 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class UserManager {
 
-    private static final int SET_ALIAS = 1;
+    private User u;
+
 
     public User getUser() {
         return u;
@@ -24,25 +27,25 @@ public class UserManager {
     public void setUser(User user) {
         this.u = user;
         if(u!=null)
-            JPushInterface.setAlias(ContextManager.getContext(),SET_ALIAS,u.getId());
+        {
+            Intent intent = new Intent(ContextManager.getContext(), PushService.class);
+            ContextManager.getContext().startService(intent);
+            //JPushInterface.setAlias(ContextManager.getContext(),SET_ALIAS,u.getId());
+        }
         else
-            JPushInterface.setAlias(ContextManager.getContext(),SET_ALIAS,"");
+        {
+            Intent intent = new Intent(ContextManager.getContext(), PushService.class);
+            ContextManager.getContext().stopService(intent);
+            //JPushInterface.setAlias(ContextManager.getContext(),SET_ALIAS,"");
+        }
     }
 
-    public void testJpush()
+    /**
+     * 登出
+     */
+    public void logout()
     {
-        int start = 17478001;
-        for(int i = 0;i<50;i++)
-            try{
-                JPushInterface.setAlias(ContextManager.getContext(),SET_ALIAS,(start++)+"");
-                LogUtil.d("注册别名:"+start);
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            LogUtil.e("发生错误");
-        }
-        JPushInterface.getAlias(ContextManager.getContext(),SET_ALIAS);
-        JPushInterface.setAlias(ContextManager.getContext(),SET_ALIAS,17478001+"");
+        setUser(null);
     }
 
     /**
@@ -51,18 +54,16 @@ public class UserManager {
      */
     public boolean isLogined()
     {
-        return getUser() == null?false:true;
+        return getUser() != null;
     }
-
-    private User u=getFakeUser();
-
-    private static UserManager userManager;
 
     public static UserManager getInstance()
     {
-        if(userManager == null)
-            userManager = new UserManager();
-        return userManager;
+        return InnerClass.userManager;
+    }
+
+    private static class InnerClass{
+        private static UserManager userManager = new UserManager();
     }
 
     /**

@@ -2,6 +2,7 @@ package com.cxyz.commons;
 
 import com.cxyz.commons.widget.sideview.CharacterParser;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -3,14 +3,24 @@ package com.cxyz.vac.constant;
 
 import android.accounts.NetworkErrorException;
 
+import com.cxyz.commons.utils.GsonUtil;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataHandler;
 import com.cxyz.commons.utils.HttpUtil.listener.DisposeDataListener;
 import com.cxyz.commons.utils.HttpUtil.request.RequestParams;
+import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.logiccommons.constant.Constant;
 import com.cxyz.logiccommons.domain.CheckResult;
+import com.cxyz.logiccommons.domain.Photo;
+import com.cxyz.logiccommons.domain.Vacate;
+import com.cxyz.vac.dto.VacateDto;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+
+import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -117,6 +127,96 @@ public class RequestCenter {
         } catch (NetworkErrorException e) {
             e.printStackTrace();
             listener.onFailure("网络状态异常");
+        }
+        return null;
+    }
+
+    /**
+     * 上传假条
+     * @param vacateDto 请假信息
+     * @param files 请假照片
+     * @param listener
+     * @return
+     */
+    public static Call uploadVacate(VacateDto vacateDto, File files[], DisposeDataListener listener)
+    {
+        RequestParams params = new RequestParams();
+        try {
+            params.put("vacateDto", GsonUtil.toJson(vacateDto));
+            LogUtil.e(GsonUtil.toJson(vacateDto));
+            VacateDto dto = (VacateDto) GsonUtil.fromJson(GsonUtil.toJson(vacateDto),new TypeToken<VacateDto>(){}.getType());
+            System.out.println("转换成功"+dto);
+            if(files != null)
+                params.put("files",files);
+            try {
+                return CommonOkHttpClient.uploadFile(NetWorkConstant.UPLOAD_VACATE,params,new DisposeDataHandler(listener,new TypeToken<CheckResult<String>>(){}.getType()));
+            } catch (NetworkErrorException e) {
+                e.printStackTrace();
+                listener.onFailure("网络状态异常");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            listener.onFailure("未知异常");
+        }
+        return null;
+    }
+
+    /**
+     * 删除图片
+     * @param vacId 请假id
+     * @param listener
+     * @return
+     */
+    public static Call deletePhoto(int vacId,DisposeDataListener listener)
+    {
+        HashMap<String,String> map = new HashMap<>();
+        map.put("id",vacId+"");
+        try {
+            return CommonOkHttpClient.get(NetWorkConstant.DELETE_PHOTO,new RequestParams(map),new DisposeDataHandler(listener,new TypeToken<CheckResult>(){}.getType()));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+        return null;
+    }
+
+    /**
+     * 上传图片
+     * @param id 请假id
+     * @param files 图片
+     * @param listener 监听
+     * @return
+     */
+    public static Call uploadPhoto(int id, File files[], DisposeDataListener listener)
+    {
+        RequestParams params = new RequestParams();
+        params.put("id",id+"");
+        params.put("files",files);
+        try {
+            return CommonOkHttpClient.uploadFile(NetWorkConstant.UPLOAD_PHOTO,params,new DisposeDataHandler(listener,new TypeToken<CheckResult<List<Photo>>>(){}.getType()));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
+            listener.onFailure("网络状态异常");
+        }
+        return null;
+    }
+
+    /**
+     * 获取请假信息及照片
+     * @param gradeId 班级id
+     * @param from 开始时间
+     * @param to 结束时间
+     */
+    public static Call getVacatesInDates(Integer gradeId,String from,String to,DisposeDataListener listener)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("gradeId",gradeId.toString());
+        map.put("from",from);
+        map.put("to",to);
+        try {
+            return CommonOkHttpClient.get(NetWorkConstant.GET_VACATE_IN_DATES,new RequestParams(map),new DisposeDataHandler(listener,new TypeToken<CheckResult<List<Vacate>>>(){}.getType()));
+        } catch (NetworkErrorException e) {
+            e.printStackTrace();
         }
         return null;
     }

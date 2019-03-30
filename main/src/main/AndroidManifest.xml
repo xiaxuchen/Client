@@ -7,13 +7,10 @@
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/CheckTheme" >
-        <activity
-            android:name="com.cxyz.mains.activity.HomeActivity">
-        </activity>
-        <activity android:name="com.cxyz.mains.activity.SplashActivity">
-        </activity>
-        <activity android:name="com.cxyz.mains.activity.LoginActivity">
-        </activity>
+        <activity android:name="com.cxyz.mains.activity.HomeActivity" />
+        <activity android:name="com.cxyz.mains.activity.SplashActivity" />
+        <activity android:name="com.cxyz.mains.activity.LoginActivity" />
+        <activity android:name=".activity.FirstShowActivity" />
     </application>
 
 </manifest>

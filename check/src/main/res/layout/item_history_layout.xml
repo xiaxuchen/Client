@@ -1,42 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:background="@drawable/check_block"
-    >
+    android:paddingBottom="8dp">
 
     <TextView
-        android:layout_margin="10dp"
-        android:id="@+id/tv_task_name"
+        android:id="@+id/tv_lesson_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#5e5e5e"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:textSize="18sp"
         android:text="离散数学"
-        android:textSize="20sp"
         />
 
     <TextView
-        android:id="@+id/tv_des"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@+id/tv_task_name"
+        android:layout_marginTop="8dp"
+        android:id="@+id/tv_date_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#aeaeae"
-        android:textSize="16sp"
-        android:text="迟到:1 早退:1 缺勤:1 请假:1"/>
+        android:text="考勤日期:"
+        android:textColor="@color/common_line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lesson_name"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_lesson_name"
+        />
 
     <TextView
+        android:layout_marginLeft="8dp"
         android:id="@+id/tv_date"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#aeaeae"
+        app:layout_constraintLeft_toRightOf="@+id/tv_date_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_date_hint"
+        android:textColor="@color/common_black"
         />
-</RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/tv_times_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="考勤课次:"
+        android:textColor="@color/common_line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_hint"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_date_hint"
+        />
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:id="@+id/tv_times"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/tv_times_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_times_hint"
+        android:textColor="@color/common_black"
+        />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/tv_result_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="考勤结果:"
+        android:textColor="@color/common_line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_times_hint"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_times_hint"
+        />
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:id="@+id/tv_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/tv_result_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_result_hint"
+        android:textColor="@color/common_black"
+        />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/tv_commit_time_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_line"
+        android:text="提交时间:"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_result_hint"
+        app:layout_constraintTop_toBottomOf="@+id/tv_result_hint"/>
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:id="@+id/tv_commit_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_black"
+        app:layout_constraintLeft_toRightOf="@+id/tv_commit_time_hint"
+        app:layout_constraintTop_toTopOf="@+id/tv_commit_time_hint"/>
+
+
+
+
+
+    <!--<TextView-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:id="@+id/tv_task_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#5e5e5e"-->
+        <!--android:textSize="20sp"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_des"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#aeaeae"-->
+        <!--android:textSize="16sp"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tv_task_name"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/tv_task_name"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_date"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="12sp"-->
+        <!--android:textColor="#aeaeae"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/tv_des"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--/>-->
+</android.support.constraint.ConstraintLayout>

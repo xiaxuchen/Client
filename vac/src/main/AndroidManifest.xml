@@ -6,6 +6,8 @@
         <activity android:name=".activity.VacateActivity" />
         <activity android:name=".activity.MineVacateActivity" />
         <activity android:name=".activity.AuditActivity" />
+        <activity android:name=".activity.UploadVacateActivity" />
+        <activity android:name=".activity.VacateInfoActivity" />
     </application>
 
 </manifest>

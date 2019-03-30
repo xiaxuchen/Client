@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/common_white"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/itv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/common_primary_color"
+                />
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{vac-down}"
+                android:textSize="14sp"
+                android:textColor="@color/common_line"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_vac_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/common_transparent"
+        android:dividerHeight="8dp"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        />
+
+    <TextView
+        android:background="@color/common_white"
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="暂无假条信息"
+        android:textSize="18sp"
+        android:visibility="gone"
+        />
+
+
+</LinearLayout>

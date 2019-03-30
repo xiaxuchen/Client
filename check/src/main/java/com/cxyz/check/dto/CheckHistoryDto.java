@@ -1,6 +1,7 @@
 package com.cxyz.check.dto;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,7 +17,13 @@ public class CheckHistoryDto {
     /**
      * 任务名称
      */
-    private String taskName;
+    private String lessonName;
+
+    private Date date;
+
+    private int start;
+
+    private int end;
 
     /**
      * 考勤结果的状态
@@ -31,14 +38,6 @@ public class CheckHistoryDto {
      * 提交时间
      */
     private Timestamp commitTime;
-
-    public String getTaskName() {
-        return taskName;
-    }
-
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
 
     public Timestamp getCommitTime() {
         return commitTime;
@@ -72,11 +71,46 @@ public class CheckHistoryDto {
         this.id = id;
     }
 
+    public String getLessonName() {
+        return lessonName;
+    }
+
+    public void setLessonName(String lessonName) {
+        this.lessonName = lessonName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public void setEnd(int end) {
+        this.end = end;
+    }
+
     @Override
     public String toString() {
         return "CheckHistoryDto{" +
                 "id=" + id +
-                ", taskName='" + taskName + '\'' +
+                ", lessonName='" + lessonName + '\'' +
+                ", date='" + date + '\'' +
+                ", start=" + start +
+                ", end=" + end +
                 ", state=" + state +
                 ", results=" + results +
                 ", commitTime=" + commitTime +

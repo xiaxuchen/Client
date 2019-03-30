@@ -66,11 +66,6 @@ public class CheckHistoryActivity extends BaseActivity<IHistoryPresenter> implem
     }
 
     @Override
-    protected boolean isStateBar() {
-        return false;
-    }
-
-    @Override
     public void setEvent() {
         refresh.setOnRefreshListener(refreshLayout -> {
            iPresenter.getHistory();
@@ -109,7 +104,7 @@ public class CheckHistoryActivity extends BaseActivity<IHistoryPresenter> implem
     public void finishRefresh(List<CheckHistoryDto> historyDtos) {
         if(adapter == null)
         {
-            adapter = new HistoryAdapter(getActivity(),historyDtos,R.layout.item_my_history_layout);
+            adapter = new HistoryAdapter(getActivity(),historyDtos,R.layout.item_history_layout);
             lv_history.setAdapter(adapter);
             adapter.setListener((view, position) -> {
                 Intent intent = new Intent(getActivity(),AlterCheckActivity.class);

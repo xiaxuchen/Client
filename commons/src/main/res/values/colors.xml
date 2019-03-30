@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="common_primary_color">#FF0CA2FF</color>
     <color name="common_primary_color_50p">#800CA2FF</color>
+    <color name="common_orange">#FF6633</color>
     <!--第二色调-->
     <color name="common_second_yellow">#eaf048</color>
     <!--第三色调-->
@@ -14,6 +15,9 @@
     <!--第五色调-->
     <color name="common_fifth_cyan">#f6d6ff</color>
     <color name="common_white">#ffffff</color>
+    <color name="common_black">#000000</color>
     <color name="common_line">#bfbfbf</color>
+    <color name="common_line_half_a">#80bfbfbf</color>
+    <color name="common_transparent">#00000000</color>
     <color name="gray">#8A8A8A</color>
 </resources>

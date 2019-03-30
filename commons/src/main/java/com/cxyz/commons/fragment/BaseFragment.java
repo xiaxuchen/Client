@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 
 import com.cxyz.commons.IPresenter.IBasePresenter;
 import com.cxyz.commons.IView.IBaseView;
-import com.cxyz.commons.IView.IDefaultView;
+import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.activity.FragmentActivity;
 import com.cxyz.commons.context.ContextManager;
 import com.cxyz.commons.utils.LogUtil;
-import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by 夏旭晨 on 2018/9/21.
@@ -56,8 +55,6 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     protected boolean mIsVisible;
 
-    private IBaseView iBaseView;
-
     /**
      * 是否加载完成
      * 当执行完oncreatview,View的初始化方法后方法后即为true
@@ -73,9 +70,10 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        //注册leakcanary
+        ContextManager.getRefWatcher().watch(this);
         iPresenter = createIPresenter();
         super.onCreate(savedInstanceState);
-        iBaseView = getIView();
         if(iPresenter!=null)
             iPresenter.attachV(this);
     }
@@ -83,7 +81,8 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.mActivity = (FragmentActivity) activity;
+        if(activity instanceof FragmentActivity)
+            this.mActivity = (FragmentActivity) activity;
     }
 
     /**
@@ -113,6 +112,7 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
         mIsPrepare = true;
         onLazyLoad();
         setListener();
+        afterInit();
         return mRootView;
     }
 
@@ -145,6 +145,11 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     protected abstract void setListener();
 
+    /**
+     * 初始化完成回调
+     */
+    protected void afterInit(){}
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -175,12 +180,18 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      * @param <T>
      * @return
      */
-    @SuppressWarnings("unchecked")
     protected <T extends View> T findViewById(int id) {
         if (mRootView == null) {
             return null;
         }
         return (T) mRootView.findViewById(id);
+    }
+
+    protected ViewGroup getParent(View view)
+    {
+        if(view.getParent() == null)
+            return null;
+        return (ViewGroup) view.getParent();
     }
 
     /**
@@ -238,9 +249,6 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
      */
     @Override
     public void onDestroy() {
-        //注册leakcanary
-        RefWatcher refWatcher = ContextManager.getRefWatcher();
-        refWatcher.watch(this);
         if(iPresenter!=null)
         {
             iPresenter.detachV();
@@ -252,23 +260,14 @@ public abstract class BaseFragment<p extends IBasePresenter> extends Fragment im
 
     @Override
     public void showLoadingView() {
-        if(getIView() != null)
-        {
-            iBaseView.showLoadingView();
-        }
-    }
-
-    protected IBaseView getIView()
-    {
-        return new IDefaultView(getActivity(),"正在加载中...",false);
+        if(getActivity() instanceof BaseActivity)
+            ((BaseActivity)getActivity()).showLoadingView();
     }
 
     @Override
     public void hideLoadingView() {
-        if(getIView() != null)
-        {
-            iBaseView.hideLoadingView();
-        }
+        if(getActivity() instanceof BaseActivity)
+            ((BaseActivity)getActivity()).hideLoadingView();
     }
 
 }

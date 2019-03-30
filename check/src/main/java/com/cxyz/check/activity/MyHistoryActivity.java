@@ -70,11 +70,6 @@ public class MyHistoryActivity extends BaseActivity<IMyHistoryPresenter> impleme
     }
 
     @Override
-    protected boolean isStateBar() {
-        return false;
-    }
-
-    @Override
     public void setEvent() {
         refresh.setOnRefreshListener(refreshLayout -> {
             if(result == null)

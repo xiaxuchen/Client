@@ -157,15 +157,32 @@ public class FileUtil {
         }
     }
 
-    public static void open(Context mContext,File file)
+    public static void open(Context mContext,File file) {
+        Intent intent = null;
+        try {
+            intent = getOpenIntent(mContext,file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            ToastUtil.showShort(e.getMessage());
+        }
+        mContext.startActivity(intent);
+    }
+
+    /**
+     * 获取打开文件的Intent
+     * @param mContext
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    public static Intent getOpenIntent(Context mContext,File file) throws IOException
     {
         String filePath = file.getPath();
         if (!file.exists()){
             //如果文件不存在
-            Toast.makeText(mContext, "打开失败，原因：文件已经被移动或者删除", Toast.LENGTH_SHORT).show();
-            return;
+            throw new IOException("打开失败，原因：文件已经被移动或者删除");
         }
-    /* 取得扩展名 */
+        /* 取得扩展名 */
         String end = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length()).toLowerCase(Locale.getDefault());
     /* 依扩展名的类型决定MimeType */
         Intent intent = null;
@@ -194,8 +211,9 @@ public class FileUtil {
         } else {
             intent = generateCommonIntent(mContext,filePath,DATA_TYPE_ALL);
         }
-        mContext.startActivity(intent);
+        return intent;
     }
+
 
     /**
      * 获取对应文件的Uri

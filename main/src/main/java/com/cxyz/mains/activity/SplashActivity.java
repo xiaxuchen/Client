@@ -3,36 +3,52 @@ package com.cxyz.mains.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.cxyz.commons.activity.BaseActivity;
 import com.cxyz.commons.utils.AppUtil;
 import com.cxyz.commons.utils.LogUtil;
+import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
+import com.cxyz.logiccommons.manager.UserManager;
 import com.cxyz.logiccommons.service.UpdateService;
 import com.cxyz.mains.R;
 import com.cxyz.mains.ipresenter.ISplashPresenter;
 import com.cxyz.mains.ipresenter.ipresenterimpl.ISplashPresenterImpl;
 import com.cxyz.mains.iview.ISplashView;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashActivity extends BaseActivity<ISplashPresenter> implements ISplashView {
 
+    private static final int STATE_LOGIN = 0;
 
-    /**
-     * 至少让用户看三秒钟
-     */
-    private static final long TARGETTIME = 3000;
+    private static final int STATE_FIRST_SHOW = 1;
 
-    private ProgressBar pb_pro;
+    private static final int STATE_HOME = 2;
 
-    private AlertDialog dialog;
+    private Timer timer = new Timer();
 
-    private long start_time;
+    private int times = 0;
+
+    private boolean flag = false;//判断是否为第一次启动
+
+    private TextView tv_timer;
+
+    private boolean autoLogined = false;
+
+    private int state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,36 +62,52 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
 
     @Override
     public void initView() {
+        tv_timer = findViewById(R.id.tv_timer);
     }
 
     @Override
     public void initData() {
-
+        if(!getSpUtil().getString("versionName","0").equals(AppUtil.getVersionName(getActivity())))
+            flag = true;
+        LogUtil.e(getSpUtil().getString("versionName","0"));
+        LogUtil.e(!getSpUtil().getString("versionName","0").equals(AppUtil.getVersionName(getActivity())));
+        if(flag)
+            state = STATE_FIRST_SHOW;
+        else
+            state = STATE_LOGIN;
     }
 
     @Override
     public void setEvent() {
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        LogUtil.e("kkkk");
-        if(requestCode == UpdateService.REQUEST_INSTALL && resultCode == RESULT_CANCELED)
-        {
-            noUpdate();
-        }
+        tv_timer.setOnClickListener(view -> {
+            if(!autoLogined)
+            {
+                afterLogin();
+                timer.cancel();
+            }
+        });
     }
 
     @Override
     protected void afterInit() {
         super.afterInit();
-        start_time = System.currentTimeMillis();
+        iPresenter.autoLogin();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> {
+                    times++;
+                    if(times == 3)
+                    {
+                        afterLogin();
+                        return;
+                    }
+                    tv_timer.setText(3-times+"s 跳过");
+                });
+            }
+        },1000,1000);
         //初始化完成后根据sp中的update值选择更新或自动登录
-        if(getSpUtil().getBoolean("update",true))
-            iPresenter.Update();
-        else
-            iPresenter.autoLogin();
+        //iPresenter.autoLogin();
     }
 
     @Override
@@ -89,108 +121,38 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
     }
 
     @Override
-    public void showUpdateView(int versionCode, String des,final String url) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setIcon(R.mipmap.common_logo);
-        builder.setTitle("发现新版本"+versionCode);
-        builder.setMessage(des);
-        builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getActivity(),UpdateService.class);
-                intent.putExtra("apkUrl",url);
-               /* ((MyApp)getMyApp()).setAttribute("splashActivity",getActivity());*/
-                startService(intent);
-                dialog.dismiss();
-                noUpdate();
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                noUpdate();
-            }
-        });
-        dialog = builder.create();
-        dialog.show();
-    }
-
-    @Override
-    public void showDownload(int progress, int max) {
-        if(pb_pro != null)
-            pb_pro.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void installApp(File app) {
-        AppUtil.installApk(getActivity(),app.getAbsolutePath());
-    }
-
-    @Override
-    public void exitSplash() {
-        lengthen(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(LoginActivity.class,null);
-                finish();
-            }
-        });
-
-    }
-
-    @Override
-    public void noUpdate() {
-        iPresenter.autoLogin();
-    }
-
-    @Override
     public void autoLoginSuccess() {
-        lengthen(new Runnable() {
-            @Override
-            public void run() {
-                LogUtil.e(System.currentTimeMillis()+"");
-                ToastUtil.showShort("自动登录成功");
-                startActivity(HomeActivity.class);
-                finish();
-            }
-        });
+        if(flag)
+            state = STATE_FIRST_SHOW;
+        else
+            state = STATE_HOME;
     }
 
     @Override
     public void autoLoginFail(final String info) {
-        lengthen(new Runnable() {
-            @Override
-            public void run() {
-                if(!info.isEmpty())
-                    ToastUtil.showShort(info);
-                startActivity(LoginActivity.class);
-                finish();
-            }
-        });
+        if(flag)
+            state = STATE_FIRST_SHOW;
+        else
+            state = STATE_LOGIN;
     }
 
     /**
-     * 延时操作，让用户至少看三秒我们的闪屏页面
+     * 登录之后（如果登录超时也会调用）
      */
-    private void lengthen(final Runnable runnable)
+    private void afterLogin()
     {
-        final long len;
-        if((len = System.currentTimeMillis()-start_time)<TARGETTIME)
+        autoLogined = true;
+        timer.cancel();
+        Class clazz = null;
+        switch (state)
         {
-            new Thread(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            SystemClock.sleep(TARGETTIME-len);
-                            runOnUiThread(runnable);
-                        }
-                    }
-            ).start();
-        }else
-        {
-            runnable.run();
+            case STATE_FIRST_SHOW:clazz = FirstShowActivity.class;break;
+            case STATE_LOGIN:clazz = LoginActivity.class;break;
+            case STATE_HOME:clazz = HomeActivity.class;break;
         }
+        LogUtil.e(state);
+        Intent intent = new Intent(getActivity(),clazz);
+        startActivity(intent);
+        finish();
     }
-
 }

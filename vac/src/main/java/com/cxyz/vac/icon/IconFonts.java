@@ -25,8 +25,7 @@ public enum IconFonts implements Icon {
 
     @Override
     public String key() {
-        LogUtil.e("vac_".concat(name().replace('_', '-')));
-        return "vac_".concat(name().replace('_', '-'));
+        return "vac_".concat(name()).replace('_', '-');
     }
 
     @Override

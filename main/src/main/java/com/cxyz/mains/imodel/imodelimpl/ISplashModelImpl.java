@@ -18,30 +18,5 @@ import org.json.JSONException;
  */
 
 public class ISplashModelImpl extends ISplashModel {
-    @Override
-    public void confirmUpdate(final ConfirmListener listener) {
-        try {
-            CommonOkHttpClient.get(NetWorkConstant.UPDATE_URL,null,new DisposeDataHandler(new DisposeDataListener() {
-                @Override
-                public void onSuccess(Object responseObj) {
-                    if(listener != null)
-                        try {
-                            listener.onUpdate((UpdateEntity) GsonUtil.fromJson(responseObj.toString(), new TypeToken<UpdateEntity>(){}.getType()));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            listener.onFail("服务器异常");
-                        }
-                }
-
-                @Override
-                public void onFailure(Object error) {
-                    listener.onUpdate(null);
-                }
-            }));
-        } catch (NetworkErrorException e) {
-            e.printStackTrace();
-            listener.onFail(null);
-        }
-    }
 
 }

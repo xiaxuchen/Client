@@ -4,6 +4,7 @@ package com.cxyz.commons.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.cxyz.commons.R;
@@ -12,6 +13,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -63,8 +65,8 @@ public class ImageLoaderManager {
     private DisplayImageOptions getDefaultOptions()
     {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.mipmap.ic_launcher)//设置加载之前的显示的图片
-                .showImageOnFail(R.mipmap.ic_launcher)//加载失败显示的图片
+                .showImageForEmptyUri(R.mipmap.common_img_loading)//设置加载之前的显示的图片
+                .showImageOnFail(R.mipmap.common_img_load_fail)//加载失败显示的图片
                 .cacheInMemory(true)//设置内存缓存可用
                 .cacheOnDisk(true)//设置磁盘缓存可用
                 .bitmapConfig(Bitmap.Config.RGB_565)//设置图片的解码方式
@@ -80,7 +82,7 @@ public class ImageLoaderManager {
      * @param url 加载图片的路径
      */
     public void displayImage(ImageView imageView, String url){
-        displayImage(imageView,url,null,null);
+        displayImage(imageView,url,getDefaultOptions(),null);
     }
 
     /**
@@ -91,8 +93,9 @@ public class ImageLoaderManager {
      * @param listener 回调的listener
      */
     public void displayImage(ImageView imageView, String url, DisplayImageOptions options, ImageLoadingListener listener){
-        if(mImageLoader!=null)
-            mImageLoader.displayImage(url,imageView,options,listener);
+        if(mImageLoader == null)
+            options = getDefaultOptions();
+        mImageLoader.displayImage(url,imageView,options,listener);
     }
 
     /**
@@ -113,6 +116,29 @@ public class ImageLoaderManager {
      */
     public void displayImage(ImageView imageView,String url, ImageLoadingListener listener){
         displayImage(imageView,url,null,listener);
+    }
+
+    public static class ImageLoadingListenerWrapper implements ImageLoadingListener{
+
+        @Override
+        public void onLoadingStarted(String imageUri, View view) {
+
+        }
+
+        @Override
+        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+        }
+
+        @Override
+        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+
+        }
+
+        @Override
+        public void onLoadingCancelled(String imageUri, View view) {
+
+        }
     }
 
 }
