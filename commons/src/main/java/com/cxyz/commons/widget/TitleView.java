@@ -100,12 +100,12 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         View v = View.inflate(getContext(), R.layout.views_title_layout, this);
 
         //如果支持沉浸式，则给TitleView添加上padding
-        if(stateBarHelper.translucentSupport())
-        {
-            LogUtil.d(v.getPaddingTop());
-            v.setPadding(v.getPaddingLeft(),v.getPaddingTop()+stateBarHelper.getStateBarHeight(getContext()),v.getPaddingRight(),v.getPaddingBottom());
-            LogUtil.d(v.getPaddingTop());
-        }
+//        if(stateBarHelper.translucentSupport())
+//        {
+//            LogUtil.d(v.getPaddingTop());
+//            v.setPadding(v.getPaddingLeft(),v.getPaddingTop()+stateBarHelper.getStateBarHeight(getContext()),v.getPaddingRight(),v.getPaddingBottom());
+//            LogUtil.d(v.getPaddingTop());
+//        }
         v.setBackgroundResource(background);
         back = findViewById(R.id.title_back);
         title = findViewById(R.id.title_title);

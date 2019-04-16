@@ -1,23 +1,23 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+apply from:rootDir.absolutePath+"/attributes.gradle"
 buildscript {
     repositories {
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter()
+        mavenCentral()
         maven { url 'https://jitpack.io' }
-        maven {
-            url '/'
-            name 'Google'
-        }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        //noinspection GradleDependency
+        classpath 'com.android.tools.build:gradle:3.0.1'
 
+        //noinspection GradleDependency
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'//lambda表达式支持
 
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'//greenDao支持
 
-        classpath "com.tinkerpatch.sdk:tinkerpatch-gradle-plugin:1.1.8"
+        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.1')
     }
 }
 
@@ -25,27 +25,16 @@ allprojects {
     repositories {
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         jcenter()
+        mavenCentral()
         maven { url 'https://jitpack.io' }
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
+        google()
+    }
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext{
-    compileSdkVersion = 26
-    buildToolsVersion = "26.0.1"
-    minSdkVersion = 16
-    targetSdkVersion = 26
-    versionCode = 1
-    versionName = "1.0"
-    versionInfo = "第一个版本"
-    //router
-    routerVersion = "1.4.0"
-    annotationProcessor = "1.2.1"
 }

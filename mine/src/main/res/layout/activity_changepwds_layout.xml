@@ -32,7 +32,7 @@
         android:hint="6-20位数字/字母/符号组合"
         android:textSize="20sp"
         android:gravity="start|center_vertical"
-        android:background="@drawable/linerlayout_shapecolor"
+        android:background="@drawable/liner_layout_shape_color"
         android:inputType="textPassword"/>
 </LinearLayout>
 
@@ -58,7 +58,7 @@
             android:hint="6-20位数字/字母/符号组合"
             android:textSize="20sp"
             android:gravity="start|center_vertical"
-            android:background="@drawable/linerlayout_shapecolor"
+            android:background="@drawable/liner_layout_shape_color"
             android:inputType="textPassword"/>
     </LinearLayout>
 

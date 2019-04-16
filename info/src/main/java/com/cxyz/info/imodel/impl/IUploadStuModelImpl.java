@@ -18,7 +18,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Administrator on 2018/12/17.
@@ -36,12 +35,6 @@ public class IUploadStuModelImpl extends IUploadStuModel {
                     CheckResult<List<String>> checkResult = (CheckResult<List<String>>) GsonUtil.fromJson(responseObj.toString(),new TypeToken<CheckResult<List<String>>>(){}.getType());
                     if(checkResult.isSuccess()) {
                         final List<String> ids = checkResult.getData();
-                        LogUtil.e(ids);
-                        for (String id : ids)
-                        {
-                            JPushInterface.setAlias(ContextManager.getContext(),Integer.parseInt(id),id);
-                            JPushInterface.deleteAlias(ContextManager.getContext(),Integer.parseInt(id));
-                        }
                         listener.onSuccess("导入成功");
                     }
                     else

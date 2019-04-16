@@ -40,11 +40,12 @@ public abstract class IBaseModel {
     public void ClearCalls()
     {
         Iterator<Call> iterator = calls.iterator();
-        while(iterator.hasNext())synchronized (calls){
-            Call call = iterator.next();
-            if (!call.isCanceled())
-                call.cancel();
-            iterator.remove();   //注意这个地方
+        while(iterator.hasNext())
+            synchronized (calls){
+                Call call = iterator.next();
+                if (!call.isCanceled())
+                    call.cancel();
+                iterator.remove();   //注意这个地方
         }
     }
 
@@ -66,6 +67,19 @@ public abstract class IBaseModel {
          * @param e 错误
          */
         void onFail(E e);
+    }
+
+    /**
+     * 由于请求失败的逻辑差不多，所以可以写一个工具方法统一处理
+     * @param o 失败时回调
+     */
+    public String handleFail(Object o)
+    {
+        if (o instanceof Exception)
+            return ((Exception) o).getMessage();
+        else
+            return o.toString();
+
     }
 
 

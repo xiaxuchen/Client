@@ -24,8 +24,8 @@ import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 public class ChangePwdACtivity extends BaseActivity <IChangePwdPresenter>implements IChangePwdView{
     private TitleView tv_changepwd_title;
-    private PasswordEditText et_changepwd_pwd;
-    private PasswordEditText et_changepwd_checkpwd;
+    private EditText et_changepwd_pwd;
+    private EditText et_changepwd_checkpwd;
     private QMUIRoundButton bt_changepwd_finish;
     @Override
     public int getContentViewId() {

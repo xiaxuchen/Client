@@ -35,12 +35,15 @@ public class ISplashPresenterImpl extends ISplashPresenter {
                 public void getInfoSuccess(User user) {
                     //把用户数据保存到UserManager
                     UserManager.getInstance().setUser(user);
+                    if(mIView != null)
                     //显示登录成功
-                    mIView.autoLoginSuccess();
+                        mIView.autoLoginSuccess();
                 }
 
                 @Override
                 public void getInfoFail(Object error) {
+                    if(mIView == null)
+                        return;
                     if(error instanceof OKHttpException)
                         mIView.autoLoginFail("自动登录异常:"+((OKHttpException) error).getMessage());
                     else if(error instanceof String)

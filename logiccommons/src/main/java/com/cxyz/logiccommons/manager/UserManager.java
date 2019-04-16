@@ -17,7 +17,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
  */
 public class UserManager {
 
-    private User u;
+    private User u = getFakeUser();
 
 
     public User getUser() {

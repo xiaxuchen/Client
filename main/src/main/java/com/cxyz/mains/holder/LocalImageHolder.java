@@ -2,7 +2,6 @@ package com.cxyz.mains.holder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -64,8 +63,8 @@ public class LocalImageHolder extends Holder<LocalImageHolder.Data> {
     public static class Data{
 
         public Data(Integer res, boolean isLast) {
-            this.res = res;
-            this.isLast = isLast;
+            Data.this.res = res;
+            Data.this.isLast = isLast;
         }
 
         public Integer res;

@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-apply from:'tinkerpatch.gradle'
+//apply from:'tinkerpatch.gradle'
+apply from:rootDir.absolutePath+'/common_android.gradle'
 
 android {
-
     signingConfigs {
         signingconfigs {
-            keyAlias '点到为止'
+            keyAlias 'untilchecked'
             keyPassword 'luohui123'
-            storeFile file('E:/d/untilchecked.jks')
+            storeFile file('E:/untilchecked.jks')
             storePassword 'luohui123'
         }
     }
@@ -16,31 +15,10 @@ android {
         // 支持大工程模式
         jumboMode = true
     }
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "com.cxyz.untilchecked"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        ndk {
-            //选择要添加的对应 cpu 类型的 .so 库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
-            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
-        }
-//9a1fc9d813243fb8f9f707da
-        manifestPlaceholders = [
-                JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "2791f4944cc55de38f90d072", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
-        ]
-
         multiDexEnabled true
     }
     lintOptions {
-
         disable 'MissingTranslation'
     }
     dexOptions {
@@ -53,39 +31,51 @@ android {
             signingConfig signingConfigs.signingconfigs
         }
     }
-    buildToolsVersion '28.0.3'
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+
+    afterEvaluate {
+        tasks.matching {
+            it.name.startsWith('dex')
+        }.each { dx ->
+            if (dx.additionalParameters == null) {
+                dx.additionalParameters = []
+            }
+            dx.additionalParameters += '--multi-dex'
+            dx.additionalParameters += "--main-dex-list=$projectDir/maindexlist.txt".toString()
+        }
     }
 }
 
 dependencies {
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.bumptech.glide:glide:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-    compile 'com.youth.banner:banner:1.4.10'//轮播图
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    if (!isDebug.toBoolean()) {
-        compile project(':check')
-        compile project(':homepage')
-        compile project(':mine')
-        compile project(':main')
-        compile project(':info')
-        compile project(':vac')
-    } else
-        compile project(':logiccommons')
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.youth.banner:banner:1.4.10'//轮播图
     //tinker热修复
-    provided("com.tinkerpatch.tinker:tinker-android-anno:1.8.0")
-    compile("com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.1.8")
-    //tinker的核心库
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.android.support.constraint:constraint-layout:1.1.3'
+//    api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
 
+    // Maven local cannot handle transist dependencies.
+//    implementation("com.tencent.tinker:tinker-android-loader:${TINKER_VERSION}") { changing = true }
+
+    //annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+//    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    //noinspection GradleDependency
+    implementation 'com.android.support:multidex:1.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    if (!isDebug.toBoolean()) {
+        implementation project(':check')
+        implementation project(':homepage')
+        implementation project(':mine')
+        implementation project(':main')
+        implementation project(':info')
+        implementation project(':vac')
+    }
+    implementation project(':logiccommons')
+    implementation project(':commons')
+    androidTestImplementation "junit:junit:4.12"
 }
 
-
-
-
-
-
+//强制使用26.1.0版本
+configurations.all() {
+    Configuration configuration ->
+        configuration.resolutionStrategy.force(["com.android.support:appcompat-v7:26.1.0","com.android.support:support-va4:26.1.0"])
+}
