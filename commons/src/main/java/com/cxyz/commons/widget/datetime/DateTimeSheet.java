@@ -21,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.contrarywind.adapter.WheelAdapter;
-import com.contrarywind.listener.OnItemSelectedListener;
 import com.contrarywind.view.WheelView;
 import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.ScreenUtil;
@@ -77,6 +76,7 @@ public class DateTimeSheet extends Dialog {
 
     @Override
     public void setContentView(int layoutResID) {
+
         contentView = LayoutInflater.from(getContext()).inflate(layoutResID, null);
         super.setContentView(contentView);
     }
@@ -181,9 +181,7 @@ public class DateTimeSheet extends Dialog {
 
         private boolean isDate = true;//当前视图标识，是否为日期视图
 
-        private boolean isAnimating = false;
-
-        private boolean isFirstSelect = true;//为了解决框架自带bug(初始化日期时会自动调用OnDateSelectedListener...)
+        boolean isAnimating = false;
 
         private Integer year,month,day,hour,minute;
         private TextView tv_date,tv_time,tv_confirm;
@@ -194,7 +192,6 @@ public class DateTimeSheet extends Dialog {
         private CalendarView calendarView;
         private Context mContext;
         private OnConfirmListener listener;
-
         public Builder(Context context)
         {
             mContext = context;
@@ -341,11 +338,6 @@ public class DateTimeSheet extends Dialog {
                 showAndHide(false);
             });
             calendarView.setOnDateSelectedListener((calendar, isClick) -> {
-
-                if (isFirstSelect) {
-                    isFirstSelect = false;
-                    return;
-                }
                 if (isAnimating)
                     return;
                 initDateView();
@@ -365,7 +357,7 @@ public class DateTimeSheet extends Dialog {
                 });
         }
 
-        private void initDateView()
+        void initDateView()
         {
             final com.haibin.calendarview.Calendar calendar = calendarView.getSelectedCalendar();
             StringBuilder builder = new StringBuilder();
@@ -384,7 +376,7 @@ public class DateTimeSheet extends Dialog {
          * 显示隐藏动画
          * @param isDate 是否显示日期view
          */
-        private void showAndHide(boolean isDate)
+        void showAndHide(boolean isDate)
         {
 
             if(isDate == this.isDate || isAnimating)

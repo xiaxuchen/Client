@@ -1,14 +1,13 @@
 package com.cxyz.untilchecked.tinker.applicationlike;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.untilchecked.R;
+
+import org.greenrobot.greendao.annotation.NotNull;
 
 
 /**
@@ -35,7 +34,6 @@ public class MainActivity extends Activity {
 
     void print(Object o)
     {
-        LogUtil.e(o);
     }
 
 }

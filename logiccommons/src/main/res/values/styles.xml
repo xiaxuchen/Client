@@ -1,12 +1,12 @@
 <resources>
 
-    <style name="CheckTheme" parent="QMUI">
-    </style>
+    <style name="CheckTheme" parent="QMUI"></style>
 
     <style name="MyEditText" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/material_grey_50</item>
         <item name="colorControlActivated">@color/material_grey_300</item>
     </style>
+
     <style name="MySwitch">
         <!--track是switch轨迹部分,这里我们用了一个selector来解决不同状态下轨迹的颜色-->
         <item name="android:track">@drawable/switch_tradck</item>

@@ -8,6 +8,7 @@ import com.cxyz.commons.application.BaseApplication;
 import com.cxyz.commons.context.ContextManager;
 import com.cxyz.commons.utils.CrashHandler;
 import com.cxyz.commons.utils.HttpUtil.CommonOkHttpClient;
+import com.cxyz.commons.utils.LogUtil;
 import com.cxyz.commons.utils.SpUtil;
 import com.cxyz.commons.utils.ToastUtil;
 import com.cxyz.logiccommons.constant.Constant;
@@ -35,9 +36,14 @@ public class MyApplication extends BaseApplication {
     private ApplicationLike tinkerApplicationLike;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
-        MultiDex.install(this);
         initTinker();
         initToast();
         initCrach();

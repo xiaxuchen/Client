@@ -19,7 +19,6 @@ public class UserManager {
 
     private User u;
 
-
     public User getUser() {
         return u;
     }

@@ -153,6 +153,9 @@ public class SplashActivity extends BaseActivity<ISplashPresenter> implements IS
         LogUtil.e(state);
         Intent intent = new Intent(getActivity(),clazz);
         startActivity(intent);
+        iPresenter.mIModle.ClearCalls();
         finish();
     }
+
+
 }

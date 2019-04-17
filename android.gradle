@@ -1,0 +1,24 @@
+//lambda表达式支持
+apply from:rootDir.absolutePath+'/common_android.gradle'
+android {
+    defaultConfig {
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    //单项目调试的AndroidManifest.xml
+    sourceSets {
+        main {
+            if (isDebug.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+        }
+    }
+
+}

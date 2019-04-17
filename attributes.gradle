@@ -1,0 +1,13 @@
+ext{
+    android = [compileSdkVersion:26,
+    buildToolsVersion : "26.0.1",
+    minSdkVersion : 16,
+    targetSdkVersion : 26,
+    versionCode : 1,
+    versionName : "1.0",
+    versionInfo : "第一个版本",
+    //router
+    routerVersion : "1.4.0",
+    annotationProcessor : "1.2.1",
+    testInstrumentationRunner : "android.support.test.runner.AndroidJUnitRunner"]
+}

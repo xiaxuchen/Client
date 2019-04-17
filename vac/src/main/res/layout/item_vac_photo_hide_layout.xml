@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_hide"
+    android:gravity="center"
+    android:background="@color/common_line"
+    android:textSize="18sp"
+    android:layout_width="128dp"
+    android:layout_height="128dp" />

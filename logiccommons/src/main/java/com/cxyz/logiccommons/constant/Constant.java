@@ -5,7 +5,7 @@ package com.cxyz.logiccommons.constant;
  */
 
 public interface Constant {
-    String ROOT_URL = "http://192.168.155.2:8080";
+    String ROOT_URL = "http://192.168.43.73:8080/Server_Check";
 
     //String ROOT_URL = "http://47.105.61.4:8080/Server_Check";
 

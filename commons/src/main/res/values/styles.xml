@@ -6,27 +6,15 @@
         <item name="android:windowExitAnimation">@anim/common_window_out_anim</item>
     </style>
 
-    <style name="dialog_loading" parent="android:Theme.Dialog">
-        <item name="android:windowFrame">@null</item><!--边框-->
-        <item name="android:backgroundDimEnabled">true</item><!--毛玻璃-->
-        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
-        <item name="android:windowIsTranslucent">false</item><!--半透明-->
-        <item name="android:windowNoTitle">true</item><!--无标题-->
-        <item name="android:windowBackground">@color/common_transparent</item>
-    </style>
-
-    <style name="dialog_date_time" parent="android:Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!--<item name="android:windowFrame">@null</item>&lt;!&ndash;边框&ndash;&gt;-->
-        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
-        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+    <style name="dialog_loading" parent="common_dialog">
         <item name="android:windowNoTitle">true</item><!--无标题-->
     </style>
 
-    <style name="dialog_big_image" parent="android:Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
+    <style name="dialog_date_time" parent="common_dialog">
+    </style>
+
+    <style name="dialog_big_image" parent="common_dialog">
         <!--<item name="android:windowFrame">@null</item>&lt;!&ndash;边框&ndash;&gt;-->
-        <item name="android:windowIsFloating">false</item><!--是否浮现在activity之上-->
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsTranslucent">true</item><!--半透明-->
         <item name="android:backgroundDimEnabled">false</item>
@@ -34,15 +22,22 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:windowAnimationStyle">@style/head_anim</item>
-        <item name="android:windowNoTitle">true</item><!--无标题-->
     </style>
 
 
     <style name="sheet_date_time" parent="android:Theme.Dialog">
-        <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/common_transparent</item>
         <item name="android:windowAnimationStyle">@null
         </item><!-- 为了避免在有 NavigationBar 的手机上 Dialog 从 NavigationBar 底部上来。去掉 Dialog 的动画，使用 View 的动画。-->
         <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="common_dialog" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:backgroundDimEnabled">true</item><!--毛玻璃-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowBackground">@color/common_transparent</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>

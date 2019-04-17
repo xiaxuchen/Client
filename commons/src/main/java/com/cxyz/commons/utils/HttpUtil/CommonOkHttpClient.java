@@ -170,4 +170,33 @@ public class CommonOkHttpClient {
         call.enqueue(new CommonFileCallback(handler));
         return call;
     }
+
+    /**
+     * 以不抛异常而是回调失败的形式检查网络状态
+     * @param type 请求方式
+     * @param url 请求路径
+     * @param params 请求参数
+     * @param handler 请求信息封装
+     * @return call
+     */
+    public static Call call(Method type, String url, RequestParams params, DisposeDataHandler handler){
+        try {
+            switch (type)
+            {
+                case GET:return get(url,params,handler);
+                case POST:return post(url,params,handler);
+                case GET_FILE:return getFile(url,params,handler);
+                case UPLOAD_FILE:return uploadFile(url,params,handler);
+            }
+
+        }catch (NetworkErrorException e) {
+            e.printStackTrace();
+            handler.listener.onFailure("网络状态异常");
+        }
+        return null;
+    }
+
+    public enum Method{
+        GET,POST,UPLOAD_FILE,GET_FILE
+    }
 }

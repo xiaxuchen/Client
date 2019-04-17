@@ -11,4 +11,10 @@
     <string name="main_forget_pwd">忘记密码?</string>
     <string name="main_stu">&#x0020;&#x0020;学生</string>
     <string name="main_tea">&#x0020;&#x0020;老师</string>
+    <string name="item_email_refresh_txt">刷新</string>
+    <string name="item_email_email_hint">&#160;&#160;&#160;请输入要绑定的邮箱</string>
+    <string name="item_email_verify_txt">发送邮件</string>
+    <string name="item_email_new_pwd_hint">&#160;&#160;&#160;请输入新密码</string>
+    <string name="item_email_title">请绑定邮箱</string>
+    <string name="item_email_hint">此操作将绑定邮箱并修改密码</string>
 </resources>
